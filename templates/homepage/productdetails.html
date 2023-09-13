@@ -6,7 +6,7 @@
     <div class="col-lg-8 col-sm-10">
         <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
         <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;">Category /</a>
-        <a href="{% url 'pdtfltr' category_name %} " style="margin-left: 10px;text-decoration: none;">{{category_name}} /</a>
+        <a href="{% url 'pdtfltr' category_name %} " style="margin-left: 10px;text-decoration: none;">{{category_name}}/</a>
         {% for d in products %}
         <a href="{% url 'pdtdtls' d.category_code d.product_code %}"
             style="margin-left: 10px;text-decoration: none;color: black;">{{product_name}} :</a>
@@ -62,7 +62,7 @@
                     {% if d.prd_quantity > 0 %}
                     {% csrf_token %}
                     <div class="input-group text-center mb-4">
-                        <input type="text" class="prd_qty" value="{{d.prd_quantity}}">
+                        <input type="text" class="prd_quantity" name="prd_quantity" value="{{d.prd_quantity}}">
                         <input type="hidden" name="prd_id" value="{{d.id}}">
                         <input type="hidden" name="prd_name" value="{{d.prd_name}}">
                         <button class="input-group-text decrement-btn btn-primary">-</button>

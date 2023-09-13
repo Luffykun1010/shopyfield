@@ -2,15 +2,7 @@
 {% load static %}
 {% block title %}ShoppyField : Orders{% endblock title %}
 {% block content %}
-<div class="row" style="margin-top: 20px;width: 100%;">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-10">
-        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-        <a href="{% url 'orders' %}" style="text-decoration: none;">Orders / </a>
-        <a href="" style="margin-left: 10px;text-decoration: none;color: black;">Delete Order :</a>
-    </div>
-    <div class="col-lg-1"></div>
-</div>
+
 {% if orders %}
 <div class="row" style="margin-top: 20px;width: 100%;">
     {% for c in orders %}
