@@ -26,9 +26,9 @@
   <div class="col-lg-2 col-sm-1"></div>
 </div>
 <div class="row" style="width: 100%;margin-bottom: 50px;">
-  <div class="col-lg-2 col-sm-1"></div>
+  <div class="col-lg-2 "></div>
   {% for d in cat %}
-  <div class="col-lg-2 col-sm-2">
+  <div class="col-lg-2 col-sm-3">
     <div class="card" style="width: 130%;height:100%">
       <a href="{% url 'pdtfltr' d.category_code %}" class="btn">
         <img src="{{d.cat_img.url}}" class="card-img-top" alt="..." style="height: 285px; width: 100%;">

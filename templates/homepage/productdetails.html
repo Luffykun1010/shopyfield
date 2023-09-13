@@ -6,7 +6,7 @@
     <div class="col-lg-8 col-sm-10">
         <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
         <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;">Category /</a>
-        <a href="{% url 'pdtfltr' category_name %} " style="margin-left: 10px;text-decoration: none;">{{category_name}}/</a>
+        <a href="{% url 'pdtfltr' category_name %} " style="margin-left: 10px;text-decoration: none;">{{category_name}} /</a>
         {% for d in products %}
         <a href="{% url 'pdtdtls' d.category_code d.product_code %}"
             style="margin-left: 10px;text-decoration: none;color: black;">{{product_name}} :</a>
@@ -17,14 +17,14 @@
 {% for d in products %}
 <div class="row" style="margin-top: 30px;width: 100%;">
     <div class="col-lg-2 col-sm-1"></div>
-    <div class="col-lg-2 col-sm-5">
+    <div class="col-lg-2 col-sm-3">
         <div class="card" style="border-color: rgb(111, 111, 200);">
             <div class="card-body">
                 <img src="{{d.prd_img.url}}" class="card-img-top" alt="..." style="height: 260px;">
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-sm-5">
+    <div class="col-lg-6 col-sm-6">
         <div class="card pd_data" style="border-color: rgb(111, 111, 200);">
             <div class="card-body">
                 <h2 style="font-family: monospace;font-weight:600;">{{d.prd_name}}</h2>

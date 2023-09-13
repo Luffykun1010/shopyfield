@@ -3,8 +3,8 @@
 {% block title %}ShoppyField : Booking{% endblock title %}
 {% block content %}
 <div class="row" style="margin-top: 20px;width: 100%;">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-10">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-10 col-sm-10">
         <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
         <a href="{% url 'booking' %}" style="margin-left: 10px;text-decoration: none;color: black;">Booking :</a>
     </div>
@@ -12,8 +12,8 @@
 </div>
 {% if booking %}
 <div class="row" style="margin-top: 30px;width: 100%;margin-bottom: 50px;">
-    <div class="col-lg-5"></div>
-    <div class="col-lg-2">
+    <div class="col-lg-5 col-sm-4"></div>
+    <div class="col-lg-2 col-sm-5">
         <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;">
         <h5 style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Your booking is empty!</h5>
     </div>
@@ -21,53 +21,53 @@
 </div>
 {% else %}
 <div class="row" style="margin-top: 20px;width: 100%;">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-2 col-sm-1"></div>
     {% if address %}
-    <div class="col-lg-4">
+    <div class="col-lg-4 col-sm-4">
         <div style="border-style: double;border-color: rgb(111, 111, 200);border-radius: 9px;">
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-7" style="margin-top: 20px;">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-7 col-sm-6" style="margin-top: 20px;">
                     <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
                         Delivery Details :</h2>
                 </div>
-                <div class="col-lg-3" style="margin-top: 20px;">
+                <div class="col-lg-3 col-sm-4" style="margin-top: 20px;">
                     <form action="change-address">
                         <button type="submit"
                             style="border: none;font-weight: 500; background-color: rgb(243, 113, 113);height: 50px;width: 100%;margin-bottom: 25px;font-size: small;height: 40px;">Change
                             Address</button>
                     </form>
                 </div>
-                <div class="col-lg-1"></div>
+                <div class="col-lg-1 col-sm-1"></div>
             </div>
             <div class="row" style="margin-top: -15px;">
-                <div class="col-lg-1"></div>
+                <div class="col-lg-1 "></div>
                 <div class="col-lg-10">
                     <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-1"></div>
+                <div class="col-lg-1 col-sm-1"></div>
                 {% for d in address %}
-                <div class="col-lg-11" style="margin-top: 5px;margin-bottom: 20px;">
+                <div class="col-lg-11 col-sm-10" style="margin-top: 5px;margin-bottom: 20px;">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-5">
                             <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">Name
                                 :</h5>
                         </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-2 col-sm-1"></div>
+                        <div class="col-lg-6 col-sm-5">
                             <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
                                 {{d.user_name}}</h5>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 8px;">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-5">
                             <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
                                 Address :</h5>
                         </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-2 col-sm-1"></div>
+                        <div class="col-lg-6 col-sm-5">
                             <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
                                 {{d.user_housename}} , <br> {{d.user_state}} , <br>
                                 {{d.user_pincode}}</h5>
@@ -79,8 +79,8 @@
         </div>
         <div style="border-style: double; border-color: rgb(111, 111, 200);border-radius: 9px;margin-top: 20px;">
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-7" style="margin-top: 15px;">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-11 col-sm-11" style="margin-top: 15px;">
                     <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
                         Payment Details :</h2>
                 </div>
@@ -95,8 +95,8 @@
             {% if payment %}
             {% for d in payment %}
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10" style=" margin-bottom: 25px;">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-10 col-sm-10" style=" margin-bottom: 25px;">
                     <h4> You have selected {{d.payment_method}} as your payment method.</h4>
                     {% if d.payment_method == 'Cash on Delivery' %}
                     <div class="row" style="width: 100%;margin-top: 20px;">
@@ -150,8 +150,8 @@
             {% endfor %}
             {% else %}
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10" style="margin-top: 5px;margin-bottom: 15px;">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-10 col-sm-10" style="margin-top: 5px;margin-bottom: 15px;">
                     <form action="payment" method="POST">
                         {% csrf_token %}
                         <input type="radio" id="cod" name="payment" value="Cash on Delivery">
@@ -179,8 +179,8 @@
     <div class="col-lg-4">
         <div style="background-color: rgb(205, 244, 77);border-radius: 9px;">
             <div class="row" style="width: 100%;">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-11">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-11 col-sm-10">
                     <h2
                         style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700;margin-top: 15px">
                         Delivery Details :</h2>
@@ -334,36 +334,35 @@
         </div>
     </div>
     {% endif %}
-    <div class="col-lg-1"></div>
-    <div class="col-lg-3">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-3 col-sm-5">
         <div style="background-color: rgb(74, 169, 174);border-radius: 9px;">
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-11" style="margin-top: 15px;">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-11 col-sm-11" style="margin-top: 15px;">
                     <h2 style="color: white;font-family: 'Times New Roman', Times, serif;font-weight: 700">Order
-                        Details
-                        :
+                        Details :
                     </h2>
                 </div>
             </div>
             <hr style="color: rgb(255, 255, 255);margin-top: 8px;">
             <div class="row" style="margin-top: -10px;width: 100%;">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-10 col-sm-10">
                     {% for c in cart %}
                     <div class="row" style="margin-top: 15px;margin-bottom: 20px;">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-3">
                             <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
                                 style="border-radius: 8px;">
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9 col-sm-9">
                             <h5 style="color: rgb(153, 253, 4);">{{c.product.prd_name}}</h5>
                             <div class="row" style="margin-top: 10px;">
-                                <div class="col-lg-10">
+                                <div class="col-lg-10 col-sm-10">
                                     <h5 style="color:  rgb(255, 255, 255);"> ₹ {{c.product.prd_rate}}</h5>
                                     <h6 style="color:  rgb(255, 255, 255); font-size: smaller;">Quantity: {{c.order_qty}}</h6>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-2 col-sm-2">
                                     <button type="button"
                                         style="background-color: rgb(255, 0, 0);height: 40px;color: white;" class="btn "
                                         data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -416,18 +415,18 @@
             </div>
             <hr style="color: rgb(255, 255, 255);margin-top: 2px;">
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-7" style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
+                <div class="col-lg-1 col-sm-1"></div>
+                <div class="col-lg-7 col-sm-6" style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
                     <h4 style="font-family: 'Times New Roman', Times, serif;font-weight: 700;">Price
                         ({{totalquantity}}) :
                     </h4>
                 </div>
-                <div class="col-lg-4" style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
+                <div class="col-lg-4 col-sm-4" style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
                     <h4 style="font-family: 'Times New Roman', Times, serif;font-weight: 700">₹ {{totalrate}}</h4>
                 </div>
             </div>
         </div>
-        <div class="col-lg-11">
+        <div class="col-sm-11">
             <p style="opacity: 70%;font-size: small;color: rgb(132, 132, 205) ;margin-top: 15px;">Safe and Secure
                 Payments. Easy
                 returns. 100% authentic products.</p>

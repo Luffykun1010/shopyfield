@@ -89,8 +89,8 @@
               <div class="col-lg-4 col-sm-10">
                 <div class="row">
                   {% for d in cat %}
-                  <div class="col-lg-2 col-sm-3">
-                    <a class="nav-link" href="{% url 'pdtfltr' d.category_code %}" style="margin-top: 11px;color:white;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">{{d.cat_name}}</a>
+                  <div class="col-lg-2 col-sm-4">
+                    <a class="nav-link" href="{% url 'pdtfltr' d.category_code %}" style="margin-top: 11px;color:white;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><h6 style="text-align: center;">{{d.cat_name}}</h6></a>
                 </div>
                 {% endfor %}
               </div>

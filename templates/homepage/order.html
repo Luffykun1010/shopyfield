@@ -3,8 +3,8 @@
 {% block title %}ShoppyField : Orders{% endblock title %}
 {% block content %}
 <div class="row" style="margin-top: 20px;width: 100%;">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-10">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-10 col-sm-10">
         <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
         <a href="{% url 'orders' %}" style="margin-left: 10px;text-decoration: none;color: black;">Orders :</a>
     </div>
@@ -12,28 +12,28 @@
 </div>
 {% if orders %}
 <div class="row" style="width: 100%;">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-10">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-10 col-sm-10">
         {% for c in orders %}
         <div style="border: solid rgb(111, 111, 200);border-radius: 10px;margin-top: 40px;background-color: rgb(111, 111, 200);">
             <div class="row" style="margin-top: 20px;margin-bottom: 20px;margin-left: 20px;">
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-sm-2">
                     <h3 style="color: white;">{{c.trackingid}}</h3>
                 </div>
             </div>
             <hr   style="color: white;">
             <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
-                <div class="col-lg-2">
-                    <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..." style="height: 180px;width: 180px;border-radius: 10px;margin-left: 10px;">
+                <div class="col-lg-2 col-sm-3">
+                    <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..." style="height: 180px;width: 100%;border-radius: 10px;margin-left: 10px;">
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-sm-6">
                     {% for d in cat %}
                     {% if d.category_code == c.product.category_code %}
                     <a href="{% url 'pdtdtls' d.category_code c.product.product_code %}" style="text-decoration: none;"><h2 style="color: white;">{{c.product}}</h2></a>
                     {% endif %}
                     {% endfor %}
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-sm-3">
                     <h5>Seller :  {{c.product.seller_company}}</h5>
                     <h5>Rate : ₹ {{c.prd_rate}}</h5>
                     <h5>Quantity : {{c.prd_qty}}</h5>
@@ -43,13 +43,13 @@
             <hr   style="color: white;">
             <div class="row" style="margin-top: 20px;margin-bottom: 15px;">
                 <div class="col-lg-1"></div>
-                <div class="col-lg-7" style="margin-top: 5px;">
+                <div class="col-lg-7 col-sm-4" style="margin-top: 7px;margin-left: 10px;">
                     <h6>Ordered on : {{c.createdat}}</h6>
                 </div>
-                <div class="col-lg-2" style="margin-top: 5px;">
+                <div class="col-lg-2 col-sm-4" style="margin-top: 5px;">
                     <h5>Order Rate : ₹ {{c.rate}}</h5>
                 </div>
-                <div class="col-lg-2" >
+                <div class="col-lg-2 col-sm-3" >
                     <a class="btn btn-primary" href="{% url 'delorder' c.trackingid%}">
                             Cancel order
                     </a>

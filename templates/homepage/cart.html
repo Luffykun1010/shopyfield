@@ -3,8 +3,8 @@
 {% block title %}ShoppyField : Cart{% endblock title %}
 {% block content %}
 <div class="row" style="margin-top: 30px;width: 100%;">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-8">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-8 col-sm-10">
         <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
         <a href="{% url 'cart' %}" style="margin-left: 10px;text-decoration: none;color: black;">Cart :</a>
     </div>
@@ -13,16 +13,16 @@
 {% if user.is_authenticated %}
 {% if cart %}
 <div class="row" style="width: 100%; margin-top: 20px;margin-bottom: 30px;">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-6" style="background-color: rgb(27, 25, 25);border-radius: 9px;">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-6 col-sm-7" style="background-color: rgb(27, 25, 25);border-radius: 9px;">
         {% for c in cart %}
         <div class="row" style="margin-top: 30px;margin-bottom: 30px;">
             <div class="col-lg-1"></div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-sm-3">
                 <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
-                    style="height: 180px;width: 180px;border-radius: 10px;">
+                    style="height: 180px;width: 100%;border-radius: 10px;">
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-sm-8">
                 {% for d in cat %}
                 {% if d.category_code == c.product.category_code %}
                 <a href="{% url 'pdtdtls' d.category_code c.product.product_code %}" style="text-decoration: none;">
@@ -30,33 +30,32 @@
                 </a>
                 {% endif %}
                 {% endfor %}
-
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-sm-5">
                         <h5 style="color:  rgb(255, 255, 255);"> ₹ {{c.product.prd_rate}}</h5>
                         <h5 style="color:  rgb(255, 255, 255);">Quantity: {{c.order_qty}}</h5>
                     </div>
-                    <div class="col-lg-8 pd_data">
+                    <div class="col-lg-8 pd_data col-sm-12">
                         <form action="" method="POST">
                             {% csrf_token %}
                             <input type="hidden" class="prd_quantity" name="prd_quantity"
                                 value="{{c.product.prd_quantity}}">
                             <input type="hidden" class="prd_id" name="prd_id" value="{{c.product_id}}">
                             <div class="row">
-                                <div class="col-lg-2">
+                                <div class="col-lg-2 col-sm-2">
                                     <button class="input-group-text decrement-btn"
                                         style="border-radius: 8px;">-</button>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-2 col-sm-5">
                                     <input type="text" name="order_qty" class="form-control qty-input text-center"
                                         value="{{c.order_qty}}"
-                                        style="border-radius: 8px;background-color: black;color: white;">
+                                        style="border-radius: 8px;background-color: black;color: white;width: 100%;">
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-2 col-sm-3">
                                     <button class="input-group-text increment-btn"
                                         style="border-radius: 8px;">+</button>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-2 col-sm-2">
                                     <button type="submit" class="btn btn-warning" style="font-size: x-small;">
                                         Change quantity </button>
                                 </div>
@@ -65,14 +64,14 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top: 25px;">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-sm-6">
                         {% for d in cat %}
                         {% if d.category_code == c.product.category_code %}
                         <a href="{% url 'pdtfltr' d.category_code  %}">Add more item</a>
                         {% endif %}
                         {% endfor %}
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-sm-6">
                         <button type="button" style="background-color: rgb(255, 0, 0);height: 40px;color: white;"
                             class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Remove item
@@ -112,11 +111,11 @@
         </div>
         {% endfor %}
     </div>
-    <div class="col-lg-1"></div>
-    <div class="col-lg-3" style="border-radius: 9px;background-color: rgb(27, 25, 25);height: 250px;">
+    <div class="col-lg-1 col-sm-1"></div>
+    <div class="col-lg-3 col-sm-3" style="border-radius: 9px;background-color: rgb(27, 25, 25);height: 250px;">
         <div class="row" style="margin-top: 20px;color: white;">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-10">
+            <div class="col-lg-1 col-sm-1"></div>
+            <div class="col-lg-10 ">
                 <h4>Details</h4>
                 <hr>
                 <p>Total quantity : <b>{{ totalquantity }}</b></p>
