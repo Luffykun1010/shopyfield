@@ -67,7 +67,9 @@
                 <div class="row" style="margin-top: 25px;">
                     <div class="col-lg-6">
                         {% for d in cat %}
+                        {% if d.category_code == c.product.category_code %}
                         <a href="{% url 'pdtfltr' d.category_code  %}">Add more item</a>
+                        {% endif %}
                         {% endfor %}
                     </div>
                     <div class="col-lg-4">
