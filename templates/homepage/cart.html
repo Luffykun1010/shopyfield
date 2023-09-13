@@ -19,10 +19,18 @@
         <div class="row" style="margin-top: 30px;margin-bottom: 30px;">
             <div class="col-lg-1"></div>
             <div class="col-lg-3">
-                <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..." style="height: 180px;width: 180px;border-radius: 10px;">
+                <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
+                    style="height: 180px;width: 180px;border-radius: 10px;">
             </div>
             <div class="col-lg-8">
-                <h4 style="color: rgb(154, 249, 10);">{{c.product.prd_name}}</h4>
+                {% for d in cat %}
+                {% if d.category_code == c.product.category_code %}
+                <a href="{% url 'pdtdtls' d.category_code c.product.product_code %}" style="text-decoration: none;">
+                    <h4 style="color: rgb(154, 249, 10);">{{c.product.prd_name}}</h4>
+                </a>
+                {% endif %}
+                {% endfor %}
+
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-3">
                         <h5 style="color:  rgb(255, 255, 255);"> ₹ {{c.product.prd_rate}}</h5>
@@ -44,13 +52,12 @@
                                         value="{{c.order_qty}}"
                                         style="border-radius: 8px;background-color: black;color: white;">
                                 </div>
-                                <div class="col-lg-2" >
+                                <div class="col-lg-2">
                                     <button class="input-group-text increment-btn"
                                         style="border-radius: 8px;">+</button>
                                 </div>
                                 <div class="col-lg-2">
-                                    <button type="submit" class="btn btn-warning"
-                                        style="font-size: x-small;">
+                                    <button type="submit" class="btn btn-warning" style="font-size: x-small;">
                                         Change quantity </button>
                                 </div>
                             </div>
@@ -59,7 +66,9 @@
                 </div>
                 <div class="row" style="margin-top: 25px;">
                     <div class="col-lg-6">
-                        <a href="{% url 'category' %}">Add more item</a>
+                        {% for d in cat %}
+                        <a href="{% url 'pdtfltr' d.category_code  %}">Add more item</a>
+                        {% endfor %}
                     </div>
                     <div class="col-lg-4">
                         <button type="button" style="background-color: rgb(255, 0, 0);height: 40px;color: white;"
@@ -74,15 +83,17 @@
                                         <p style="color: white;">Are you sure you want to remove the item <b>
                                                 "{{c.product.prd_name}}" </b> from cart? <br><br>The following related
                                             items will be
-                                            deleted: <br> Item : <b><i>{{c.product.prd_name}}</i></b><br> Quantity : <b><i>{{c.order_qty}}</i></b></p>
+                                            deleted: <br> Item : <b><i>{{c.product.prd_name}}</i></b><br> Quantity :
+                                            <b><i>{{c.order_qty}}</i></b>
+                                        </p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-success"
                                             data-bs-dismiss="modal">Close</button>
                                         <form action="delcart" method="POST">
                                             {% csrf_token %}
-                                            <input type="hidden" style="color: rgb(0, 0, 0);" class="prd_id" name="prd_id"
-                                                value="{{c.product_id}}">
+                                            <input type="hidden" style="color: rgb(0, 0, 0);" class="prd_id"
+                                                name="prd_id" value="{{c.product_id}}">
                                             <input type="hidden" name="order_qty" class="order_qty"
                                                 value="{{c.order_qty}}">
                                             <button type="submit" class="btn-primary"
@@ -114,9 +125,9 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
                 <a href="{% url 'booking' %}">
-                <button type="submit"
-                    style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 100%;height: 50px;font-weight: 600;">ORDER
-                    NOW</button></a>
+                    <button type="submit"
+                        style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 100%;height: 50px;font-weight: 600;">ORDER
+                        NOW</button></a>
             </div>
         </div>
     </div>
@@ -127,7 +138,9 @@
     <div class="col-lg-5"></div>
     <div class="col-lg-2">
         <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;">
-        <h5 style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Your cart is empty!</h5>
+        <h5
+            style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            Your cart is empty!</h5>
     </div>
     <div class="col-lg-5"></div>
 </div>

@@ -179,10 +179,8 @@ def orders(request):
             orderproduct.prd_quantity=int(orderproduct.prd_quantity)-int(i.order_qty)
             orderproduct.save()
         cart.delete()
-    # orders=Orders.objects.filter(user=request.user).first()
-    # orderitems=Orderitems.objects.filter(order=orders)
     orders=Orders.objects.filter(user=request.user)
-    context={'orders':orders}
+    context={'orders':orders,'cat':Categories.objects.all()}
     return render(request,'homepage/order.html',context)
 def delorder(request,trackingid):
     if(Orders.objects.filter(trackingid=trackingid)):

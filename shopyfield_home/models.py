@@ -54,6 +54,6 @@ class Orders(models.Model):
     product=models.ForeignKey(Products,on_delete=models.CASCADE)
     prd_rate=models.CharField(max_length=200)
     prd_qty=models.CharField(max_length=200)
-    createdat=models.DateTimeField(auto_now_add=True)
+    createdat=models.DateField(auto_now_add=True)
     def __str__(self):
         return self.trackingid     
