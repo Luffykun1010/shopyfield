@@ -1,0 +1,438 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block title %}ShoppyField : Booking{% endblock title %}
+{% block content %}
+<div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+        <a href="{% url 'booking' %}" style="margin-left: 10px;text-decoration: none;color: black;">Booking :</a>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+{% if booking %}
+<div class="row" style="margin-top: 30px;width: 100%;margin-bottom: 50px;">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-2">
+        <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;">
+        <h5 style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Your booking is empty!</h5>
+    </div>
+    <div class="col-lg-5"></div>
+</div>
+{% else %}
+<div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="col-lg-2"></div>
+    {% if address %}
+    <div class="col-lg-4">
+        <div style="border-style: double;border-color: rgb(111, 111, 200);border-radius: 9px;">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7" style="margin-top: 20px;">
+                    <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
+                        Delivery Details :</h2>
+                </div>
+                <div class="col-lg-3" style="margin-top: 20px;">
+                    <form action="change-address">
+                        <button type="submit"
+                            style="border: none;font-weight: 500; background-color: rgb(243, 113, 113);height: 50px;width: 100%;margin-bottom: 25px;font-size: small;height: 40px;">Change
+                            Address</button>
+                    </form>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="row" style="margin-top: -15px;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                {% for d in address %}
+                <div class="col-lg-11" style="margin-top: 5px;margin-bottom: 20px;">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">Name
+                                :</h5>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-6">
+                            <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
+                                {{d.user_name}}</h5>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 8px;">
+                        <div class="col-lg-3">
+                            <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
+                                Address :</h5>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-6">
+                            <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
+                                {{d.user_housename}} , <br> {{d.user_state}} , <br>
+                                {{d.user_pincode}}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div style="border-style: double; border-color: rgb(111, 111, 200);border-radius: 9px;margin-top: 20px;">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7" style="margin-top: 15px;">
+                    <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
+                        Payment Details :</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            {% if payment %}
+            {% for d in payment %}
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10" style=" margin-bottom: 25px;">
+                    <h4> You have selected {{d.payment_method}} as your payment method.</h4>
+                    {% if d.payment_method == 'Cash on Delivery' %}
+                    <div class="row" style="width: 100%;margin-top: 20px;">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                style="border: none;font-weight: 500; background-color: rgb(238, 149, 16);height: 50px;width: 100%;margin-bottom: 10px;">Continue
+                                Shopping</button>
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-body">
+                                            <p style="color: white;"> Order successfully confirmed.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="home" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-success">Home</button>
+                                            </form>
+                                            <form action="orders" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn-primary"
+                                                    style="height: 40px;border-color: white;border-style: none;color: white;border-radius: 4px;">Orders</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if d.payment_method == 'Online Payment' %}
+                    <h6 style="margin-top: 30px;">Online payment is currently unavailable.</h6>
+                    {% endif %}
+                    <div class="row" style="width: 100%;margin-top: 10px;">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <form action="change-payment" method="POST">
+                                {% csrf_token %}
+                                <button type="submit"
+                                    style="border-color: rgb(238, 149, 16); font-weight: 500;height: 50px;width: 100%;margin-bottom: 15px;font-size: small;height: 40px;">Change
+                                    Payment Method</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10" style="margin-top: 5px;margin-bottom: 15px;">
+                    <form action="payment" method="POST">
+                        {% csrf_token %}
+                        <input type="radio" id="cod" name="payment" value="Cash on Delivery">
+                        <label for="cod" style=>Cash On Delivery</label>
+                        <br>
+                        <div>
+                            <input type="radio" id="op" name="payment" value="Online Payment">
+                            <label for="op">Online Payment</label>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <button type="submit"
+                                    style="border: none;font-weight: 500; background-color: rgb(238, 149, 16); height: 50px;width: 100%;margin-bottom: 15px;">Continue
+                                    Payment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <div class="col-lg-4">
+        <div style="background-color: rgb(205, 244, 77);border-radius: 9px;">
+            <div class="row" style="width: 100%;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-11">
+                    <h2
+                        style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700;margin-top: 15px">
+                        Delivery Details :</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
+                </div>
+            </div>
+            <form action="address" method="POST" style="font-family:  Verdana, Geneva, Tahoma, sans-serif;">
+                {% csrf_token %}
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersname" style="font-weight: 500; ">Name</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usersname" name="usersname" placeholder="Enter your name" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersphone" style="font-weight: 500; ">Phone Number</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="tel"
+                            style="width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usersphone" name="usersphone" placeholder="Enter your phone number"
+                            value="{{user.get_username}}" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usershouse" style="font-weight: 500; ">House no/ Building Name</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usershouse" name="usershouse" placeholder="Enter your House no/Building Name" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersarea" style="font-weight: 500; ">Road Name / Area / Colony</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usersarea" name="usersarea" placeholder="Enter your Road Name/Area/Colony" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="userspincode" style="font-weight: 500; ">Pincode</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="userspincode" name="userspincode" placeholder="Enter your pincode" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="userscity" style="font-weight: 500; ">City</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="userscity" name="userscity" placeholder="Enter your city" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersstate" style="font-weight: 500; ">State</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <div class="btn-group dropup" style="width: 100%;">
+                            <select type="text"
+                                style="width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                                id="usersstate" name="usersstate" required>
+                                <option value="">Select your state</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <button type="submit"
+                            style="font-weight: 500; background-color: rgb(16, 238, 190);border-color: rgb(112, 112, 221);height: 50px;width: 100%;margin-bottom: 25px;">Save</button>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </form>
+        </div>
+        <div style="background-color: rgb(205, 244, 77);border-radius: 9px;margin-top: 20px;">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7" style="margin-top: 15px;margin-bottom: 15px;">
+                    <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
+                        Payment Details </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-lg-1"></div>
+    <div class="col-lg-3">
+        <div style="background-color: rgb(74, 169, 174);border-radius: 9px;">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-11" style="margin-top: 15px;">
+                    <h2 style="color: white;font-family: 'Times New Roman', Times, serif;font-weight: 700">Order
+                        Details
+                        :
+                    </h2>
+                </div>
+            </div>
+            <hr style="color: rgb(255, 255, 255);margin-top: 8px;">
+            <div class="row" style="margin-top: -10px;width: 100%;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    {% for c in cart %}
+                    <div class="row" style="margin-top: 15px;margin-bottom: 20px;">
+                        <div class="col-lg-3">
+                            <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
+                                style="border-radius: 8px;">
+                        </div>
+                        <div class="col-lg-9">
+                            <h5 style="color: rgb(153, 253, 4);">{{c.product.prd_name}}</h5>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-lg-10">
+                                    <h5 style="color:  rgb(255, 255, 255);"> ₹ {{c.product.prd_rate}}</h5>
+                                    <h6 style="color:  rgb(255, 255, 255); font-size: smaller;">Quantity: {{c.order_qty}}</h6>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button"
+                                        style="background-color: rgb(255, 0, 0);height: 40px;color: white;" class="btn "
+                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </button>
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-body">
+                                                    <p style="color: white;">Are you sure you want to remove the
+                                                        item
+                                                        <b>
+                                                            "{{c.product.prd_name}}" </b> from cart? <br><br>The
+                                                        following
+                                                        related
+                                                        items will be
+                                                        deleted: <br> Item :
+                                                        <b><i>{{c.product.prd_name}}</i></b><br>
+                                                        Quantity : <b><i>{{c.order_qty}}</i></b>
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <form action="delcart" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" style="color: rgb(0, 0, 0);" class="prd_id"
+                                                            name="prd_id" value="{{c.product_id}}">
+                                                        <input type="hidden" name="order_qty" class="order_qty"
+                                                            value="{{c.order_qty}}">
+                                                        <button type="submit" class="btn-primary"
+                                                            style="height: 40px;border-color: white;border-style: none;color: white;border-radius: 4px;">Remove</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr style="color: rgb(255, 255, 255);margin-top: 2px;">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-7" style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
+                    <h4 style="font-family: 'Times New Roman', Times, serif;font-weight: 700;">Price
+                        ({{totalquantity}}) :
+                    </h4>
+                </div>
+                <div class="col-lg-4" style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
+                    <h4 style="font-family: 'Times New Roman', Times, serif;font-weight: 700">₹ {{totalrate}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-11">
+            <p style="opacity: 70%;font-size: small;color: rgb(132, 132, 205) ;margin-top: 15px;">Safe and Secure
+                Payments. Easy
+                returns. 100% authentic products.</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

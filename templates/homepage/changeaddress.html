@@ -1,0 +1,181 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block title %}ShoppyField : Orders{% endblock title %}
+{% block content %}
+<div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+        <a href="{% url 'booking' %}" style="margin-left: 10px;text-decoration: none;">Booking /</a>
+        <a href="{% url 'chaddress' %}" style="margin-left: 10px;text-decoration: none;color: black;">Change Address
+            :</a>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <div style="border-style: double; border-color: rgb(111, 111, 200);border-radius: 9px;margin-top: 20px;">
+            <div class="row" style="width: 100%;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-11">
+                    <h2
+                        style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700;margin-top: 17px">
+                        Change Delivery Address :</h2>
+                </div>
+            </div>
+            <div class="row" style="width: 100%;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-11">
+                    <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
+                </div>
+            </div>
+            {% for d in address %}
+            <form action="" method="POST" style="font-family:  Verdana, Geneva, Tahoma, sans-serif;">
+                {% csrf_token %}
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersname" style="font-weight: 500; ">Name</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usersname" name="usersname" placeholder="Enter your name" value="{{d.user_name}}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersphone" style="font-weight: 500; ">Phone Number</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="tel"
+                            style="width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usersphone" name="usersphone" placeholder="Enter your phone number"
+                            value="{{user.get_username}}" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usershouse" style="font-weight: 500; ">House no/ Building Name</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usershouse" name="usershouse" placeholder="Enter your House no/Building Name" value="{{d.user_housename}}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersarea" style="font-weight: 500; ">Road Name / Area / Colony</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="usersarea" name="usersarea" placeholder="Enter your Road Name/Area/Colony" value="{{d.user_roadname}}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="userspincode" style="font-weight: 500; ">Pincode</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="userspincode" name="userspincode" placeholder="Enter your pincode" value="{{d.user_pincode}}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="userscity" style="font-weight: 500; ">City</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <input type="text"
+                            style="text-transform: capitalize;width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                            id="userscity" name="userscity" placeholder="Enter your city" value="{{d.user_city}}" required>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3">
+                        <label for="usersstate" style="font-weight: 500; ">State</label>
+                    </div>
+                    :
+                    <div class="col-lg-7">
+                        <div class="btn-group dropup" style="width: 100%;">
+                            <select type="text"
+                                style="width: 100%;border: none;outline: none;border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
+                                id="usersstate" name="usersstate" required>
+                                <option value="{{d.user_state}}">{{d.user_state}}</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <button type="submit"
+                            class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="font-weight: 500; background-color: rgb(16, 238, 190);border-color: rgb(112, 112, 221);height: 50px;width: 100%;margin-bottom: 25px;">Save
+                        </button>
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-body">
+                                        <p style="color: white;">Address changed successfully.</p>                                    
+                                        <button type="submit" class="btn btn-success"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

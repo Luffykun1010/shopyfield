@@ -1,0 +1,94 @@
+{% extends 'common.html' %}
+{% block title %}ShoppyField : {{product_name}}{% endblock title %}
+{% block content %}
+<div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="col-lg-2 col-sm-1"></div>
+    <div class="col-lg-8 col-sm-10">
+        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+        <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;">Category /</a>
+        <a href="{% url 'pdtfltr' category_name %} " style="margin-left: 10px;text-decoration: none;">{{category_name}}/</a>
+        {% for d in products %}
+        <a href="{% url 'pdtdtls' d.category_code d.product_code %}"
+            style="margin-left: 10px;text-decoration: none;color: black;">{{product_name}} :</a>
+        {% endfor %}
+    </div>
+    <div class="col-lg-2 col-sm-1"></div>
+</div>
+{% for d in products %}
+<div class="row" style="margin-top: 30px;width: 100%;">
+    <div class="col-lg-2 col-sm-1"></div>
+    <div class="col-lg-2 col-sm-5">
+        <div class="card" style="border-color: rgb(111, 111, 200);">
+            <div class="card-body">
+                <img src="{{d.prd_img.url}}" class="card-img-top" alt="..." style="height: 260px;">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-5">
+        <div class="card pd_data" style="border-color: rgb(111, 111, 200);">
+            <div class="card-body">
+                <h2 style="font-family: monospace;font-weight:600;">{{d.prd_name}}</h2>
+                <div class="row" style="margin-top: 44px;">
+                    <div class="col-lg-3 col-sm-5">
+                        <p style="color: rgb(0, 0, 0);">Company Name : <b>{{d.seller_company}}</b></p>
+                        {% if d.prd_quantity > 0 %}
+                        <p style="color: rgb(0, 0, 0);margin-top: -15px;">In stock : <b>{{d.prd_quantity}}</b> pcs
+                        </p>
+                        {% else %}
+                        <p
+                            style="color: rgb(0, 0, 0);margin-top: -10px;background-color: rgb(48, 198, 65);border-radius: 5px;width: 80px;text-align: center;color: white;font-weight: 600;">
+                            No stock</p>
+                        {% endif %}
+                        <h3 style="color: rgb(221, 8, 8);margin-top: 40%;">₹ {{d.prd_rate}}</h3>
+                    </div>
+                    <div class="col-lg-1 col-sm-1">
+                        <h4 style="border-left: 2px solid rgb(111, 111, 200);height: 95%;"></h4>
+                    </div>
+                    <div class="col-lg-8 col-sm-6">
+                        <p style="font-family: 'Times New Roman', Times, serif;font-size: large;">{{d.prd_desc}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-1"></div>
+</div>
+<div class="row" style="width: 100%;">
+    <div class="col-lg-2 col-sm-1"></div>
+    <div class="col-lg-2 col-sm-10">
+        <div class="card pd_data" style="border-color: rgb(111, 111, 200);margin-top: 20px;">
+            <div class="card-body">
+                <form action="" method="POST">
+                    {% if d.prd_quantity > 0 %}
+                    {% csrf_token %}
+                    <div class="input-group text-center mb-4">
+                        <input type="hidden" class="prd_quantity" value="{{d.prd_quantity}}">
+                        <input type="hidden" name="prd_id" value="{{d.id}}">
+                        <input type="hidden" name="prd_name" value="{{d.prd_name}}">
+                        <button class="input-group-text decrement-btn btn-primary">-</button>
+                        <input type="text" name="order_qty" class="form-control qty-input text-center" value="1">
+                        <button class="input-group-text increment-btn btn-primary">+</button>
+                    </div>
+                    <button type="submit"
+                        style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 100%;height: 50px;font-weight: 600;">ADD
+                        TO CART</button>
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible  fade show"
+                        style="margin-bottom: -45px;margin-top: -13px;margin-left: -15px;">
+                        <p style="font-size: medium;color:red;"><b>Alert :</b> {{message}}</p>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <label
+                        style=" background-color: rgb(31, 222, 53); color: white;border-style: none;width: 100%;height: 40px;font-weight: 600;text-align: center;padding-top: 8px;">
+                        OUT OF STOCK</label>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-sm-1"></div>
+</div>
+{% endfor %}
+</div>
+{% endblock content %}

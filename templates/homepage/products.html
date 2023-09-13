@@ -1,0 +1,42 @@
+{% extends 'common.html' %}
+{% block title %}ShoppyField : {{category_name}}{% endblock title %}
+{% block content %}
+<div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+        <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;">Category /</a>
+        <a href="{% url 'pdtfltr' category_name %}" style="margin-left: 10px;text-decoration: none;color: black;">{{category_name}} :</a>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<div class="row" style="margin-top: 30px;width: 100%;">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <h2 style="color:  rgb(133, 133, 191);font-family: Georgia, 'Times New Roman', Times, serif;">{{category_name}}:</h2>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<div class="row" style="margin-top: 10px;width: 100%;">
+    <div class="col-lg-2"></div>
+    {% for d in products %}
+    <div class="col-lg-2">
+        <a href="{% url 'pdtdtls' d.category_code d.product_code %}" style="text-decoration: none;">
+            <div class="card" style="width: 250px;height: 400px; border-color: black;">
+                
+                <div class="card-body" style="border-color: rgb(133, 133, 191);">
+                    <img src="{{d.prd_img.url}}" class="card-img-top" alt="..." style="height: 250px;">
+                    <div style="height: 50px;">
+                        <h5 class="card-title" style="margin-top: 2px;color: rgb(14, 2, 122);">
+                            {{d.prd_name}}</h5>
+                        <p style="color: black;font-size: smaller;margin-top: 5px;">{{d.seller_company}}</p>
+                    </div>
+                    <h3 style="color: brown;margin-top: 25px;">₹ {{d.prd_rate}}</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    <div class="col-lg-2"></div>
+</div>
+{% endblock content %}
