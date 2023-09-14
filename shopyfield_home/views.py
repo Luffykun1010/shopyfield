@@ -31,9 +31,13 @@ def pdtdtls(request,category_code,product_code):
                     if(Cart.objects.filter(user=request.user.id,product_id=product_id)):
                         messages.error(request,"Already added to cart")  
                     else:
-                        carts=Cart.objects.create(user=user,order_qty=order_qty,product_id=product_id)
-                        carts.save()
-                        return redirect('cart')                  
+                        for d in products:
+                            if d.prd_quantity < int(order_qty):
+                                messages.error(request,"Order quantity should be below stock quantity.")  
+                            else:
+                                carts=Cart.objects.create(user=user,order_qty=order_qty,product_id=product_id)
+                                carts.save()
+                                return redirect('cart')
                 else:
                     return redirect('login')
             prod={'products':products,'category_name':category_name,'product_name':product_name,'cat':Categories.objects.all()}
