@@ -185,7 +185,7 @@ def orders(request):
 def delorder(request,trackingid):
     if(Orders.objects.filter(trackingid=trackingid)):
         orders=Orders.objects.filter(trackingid=trackingid)
-        context={'orders':orders}
+        context={'orders':orders,'cat':Categories.objects.all()}
         if request.method == 'POST':
             orders.delete()
             return redirect('orders')

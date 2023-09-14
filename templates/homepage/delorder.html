@@ -6,12 +6,12 @@
 {% if orders %}
 <div class="row" style="margin-top: 20px;width: 100%;">
     {% for c in orders %}
-    <div class="col-lg-2"></div>
-    <div class="col-lg-10">
+    <div class="col-lg-2 col-sm-2"></div>
+    <div class="col-lg-10 col-sm-8">
         <h3>Are you sure to cancel your order? <br> Order id : {{c.trackingid}}</h3>
     </div>
-    <div class="col-lg-5"></div>
-    <div class="col-lg-2">
+    <div class="col-lg-5 col-sm-3"></div>
+    <div class="col-lg-2 col-sm-5">
         <form action="" method="POST">
             {% csrf_token %}
             <input type="hidden" class="trackingid" name="trackingid" value="{{c.trackingid}}">
@@ -20,9 +20,9 @@
             </button>
         </form>
     </div>
-    <div class="col-lg-5"></div>
-    <div class="col-lg-5"></div>
-    <div class="col-lg-2">
+    <div class="col-lg-5 col-sm-4"></div>
+    <div class="col-lg-5 col-sm-4"></div>
+    <div class="col-lg-2 col-sm-3">
         <a class="btn" href="{% url 'orders' %}" style="width: 100%;color: blue;text-decoration: underline;">
             Back to order
         </a>

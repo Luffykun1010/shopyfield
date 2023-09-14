@@ -17,7 +17,7 @@
         <div>
             <div class="row" style="width: 100%;">
                 <div class="col-lg-2 col-sm-1"></div>
-                <div class="col-lg-5 col-sm-4" style="display: flex; margin-top: 15px;">
+                <div class="col-lg-5 col-sm-5" style="display: flex; margin-top: 15px;">
                     <a class="navbar-brand d-flex" href="{% url 'home' %}">
                         <img src="{% static '/images/icon.png' %}" style="height: 60px;margin-top: -10px;" alt="logo">
                         <div class="d-flex" style="flex-direction: column;">
@@ -30,7 +30,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-2 col-sm-3" style="margin-top: 32px;text-align: center;">
+                <div class="col-lg-2 col-sm-4" style="margin-top: 32px;text-align: center;">
                     {% if user.is_authenticated %}
                     <div class="dropdown">
                         <a class="dropbtn" href="#" role="button" id="dropdownMenuLink"
