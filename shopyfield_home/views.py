@@ -6,8 +6,10 @@ from django.contrib import messages
 import random
 from django.contrib.auth import authenticate,login,logout
 from .models import Categories,Products,Cart,Address,Payment,Orders
+cartcount=Cart.objects.all().count
 def home(request):
     dict_cate={
+        'cartcount':cartcount,
         'cat':Categories.objects.all()
     }
     return render(request,'homepage/home.html',dict_cate)
@@ -15,7 +17,7 @@ def pdtfltr(request,category_code):
     if(Categories.objects.filter(category_code=category_code)):
         products=Products.objects.filter(category_code=category_code)
         category_name=Categories.objects.filter(category_code=category_code).first()
-        context={'products':products,'category_name':category_name,'cat':Categories.objects.all()}
+        context={'products':products,'category_name':category_name,'cat':Categories.objects.all(),'cartcount':cartcount}
         return render(request,'homepage/products.html',context)
 def pdtdtls(request,category_code,product_code):
     if(Categories.objects.filter(category_code=category_code)):
@@ -40,7 +42,7 @@ def pdtdtls(request,category_code,product_code):
                                 return redirect('cart')
                 else:
                     return redirect('login')
-            prod={'products':products,'category_name':category_name,'product_name':product_name,'cat':Categories.objects.all()}
+            prod={'products':products,'category_name':category_name,'product_name':product_name,'cat':Categories.objects.all(),'cartcount':cartcount}
     return render(request,'homepage/productdetails.html',prod)
 def signup(request):
     if request.method == 'POST':
@@ -67,8 +69,11 @@ def logoutpage(request):
     logout(request)
     return redirect('home')
 def categorypage(request):
+    catcount=Categories.objects.all().count
     dict_cate={
-        'cat':Categories.objects.all()
+        'cat':Categories.objects.all(),
+        'catcount':catcount,
+        'cartcount':cartcount
     }
     return render(request,'homepage/category.html',dict_cate)
 def cart(request):
@@ -90,6 +95,7 @@ def cart(request):
         'totalquantity':totalquantity,
         'totalrate':totalrate,
         'cart':cart,
+        'cartcount':cartcount,
         'cat':Categories.objects.all()
     }
     return render(request,'homepage/cart.html',dict_cart)
@@ -113,6 +119,7 @@ def booking(request):
         'totalquantity':totalquantity,
         'totalrate':totalrate,
         'cart':cart,
+        'cartcount':cartcount,
         'payment':payment,
         'address':address,
         'cat':Categories.objects.all()
@@ -135,6 +142,7 @@ def chaddress(request):
     address=Address.objects.filter(user=request.user)
     dict_book={
         'address':address,
+        'cartcount':cartcount,
         'cat':Categories.objects.all()
     }
     if request.method == 'POST':
@@ -184,12 +192,12 @@ def orders(request):
             orderproduct.save()
         cart.delete()
     orders=Orders.objects.filter(user=request.user)
-    context={'orders':orders,'cat':Categories.objects.all()}
+    context={'orders':orders,'cat':Categories.objects.all(),'cartcount':cartcount}
     return render(request,'homepage/order.html',context)
 def delorder(request,trackingid):
     if(Orders.objects.filter(trackingid=trackingid)):
         orders=Orders.objects.filter(trackingid=trackingid)
-        context={'orders':orders,'cat':Categories.objects.all()}
+        context={'orders':orders,'cat':Categories.objects.all(),'cartcount':cartcount}
         if request.method == 'POST':
             orders.delete()
             return redirect('orders')

@@ -76,8 +76,20 @@
                     </ul>
                 </div>
                 <div class="col-lg-1 col-sm-1" style="margin-top: 32px;text-align: center;">
+                    {% if cartcount > 0 %}
                     <a href="{% url 'cart' %}"
-                        style="background-color: white;color: rgb(111, 111, 200);text-decoration: none;margin-top: 2px;"><b>Cart</b></a>
+                        style="background-color: white;color: rgb(111, 111, 200);text-decoration: none;margin-top: 2px;"
+                        class="position-relative">
+                        <b>Cart</b>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-danger"
+                            style="margin-left: 5px;">
+                            ({{cartcount}})
+                        </span>
+                        </button>
+                        {% else %}
+                        <a href="{% url 'cart' %}"
+                            style="background-color: white;color: rgb(111, 111, 200);text-decoration: none;margin-top: 2px;"><b>Cart</b></a>
+                        {% endif %}
                 </div>
                 <div class="col-lg-2 col-sm-1"></div>
             </div>
@@ -85,23 +97,23 @@
         <hr style="width: 100%;color: rgb(111, 111, 200);">
         <div style="margin-top: -15px;background-color:rgb(111, 111, 200)  ;height: 4em;">
             <div class="row" style="width: 100%;">
-              <div class="col-lg-4 col-sm-1"></div>
-              <div class="col-lg-4 col-sm-10">
-                <div class="row">
-                  {% for d in cat %}
-                  <div class="col-lg-2 col-sm-4">
-                    <a class="nav-link" href="{% url 'pdtfltr' d.category_code %}" style="margin-top: 11px;color:white;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><h6 style="text-align: center;">{{d.cat_name}}</h6></a>
+                <div class="col-lg-2 col-sm-1"></div>
+                {% for d in cat %}
+                <div class="col-lg-2 col-sm-21">
+                    <a class="nav-link" href="{% url 'pdtfltr' d.category_code %}"
+                        style="margin-top: 11px;color:white;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                        <h6 style="text-align: center;">{{d.cat_name}}</h6>
+                    </a>
                 </div>
                 {% endfor %}
-              </div>
-              <div class="col-lg-4"> </div>
-            </div>
-          </div>
+            <div class="col-lg-2"> </div>
+        </div>
+        </div>
     </header>
 
 
 
-    <section style="width: 100%;margin-bottom: 50px;">  
+    <section style="width: 100%;margin-bottom: 50px;">
         {% block content %}
         {% endblock content %}
     </section>
