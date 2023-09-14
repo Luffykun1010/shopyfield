@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}Login{% endblock title %}
 {% block content %}
-<div class="col-lg-2 col-xs-4"></div>
-<div class="col-lg-2 col-xs-8"
-    style="margin-top: 50px;width: 350px;border-style:dashed;border-color:rgb(111, 111, 200);border-radius: 15px;height: 390px;margin-left: 20px;">
+<div class="col-lg-2 col-sm-1"></div>
+<div class="col-lg-2 col-sm-4"
+    style="margin-top: 50px;width: 350px;border-style:dashed;border-color:rgb(111, 111, 200);border-radius: 15px;height: 390px;">
     {% if user.is_authenticated %}
     <h3 style="text-align: center; margin-top: 90px;">Already logged in!!</h3>
     <p style="margin-top:100px; font-size: medium;text-align: center;">Back to <a href="{% url 'home' %}"> Home Page</a>
@@ -13,7 +13,7 @@
     </p>
     {% else %}
     <form action="login" method="POST"
-        style="margin-top: 25px;margin-bottom: 20px;margin-left: 10px;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+        style="margin-top: 25px;margin-bottom: 20px;font-family: Verdana, Geneva, Tahoma, sans-serif;">
         {% csrf_token %}
         <h4>Login to your account</h4>
         <div class="d-flex" style="margin-top: 10px;flex-direction: column;margin-right: 10px;">
@@ -36,9 +36,9 @@
     </form>
     {% endif %}
 </div>
-<div class="col-lg-6 col-xs-12" style="margin-top: 50px;height: 380px;">
+<div class="col-lg-6 col-sm-6" style="margin-top: 50px;height: 380px;">
     <img style="width: 100%;height: 390px;;border-radius: 15px;margin-left: 10px;"
         src="{% static '/images/shopimg2.jpg' %}" alt="">
 </div>
-<div class="col-lg-2"></div>
+<div class="col-lg-2 col-sm-1"></div>
 {% endblock content %}

@@ -4,7 +4,7 @@
 {% block content %}
 <div class="col-lg-2 col-sm-1"></div>
 <div class="col-lg-4 col-sm-4"
-    style="margin-top: 50px;margin-left: 40px;width: 350px;border-style:dashed;border-color:rgb(111, 111, 200);border-radius: 15px;">
+    style="margin-top: 50px;width: 350px;border-style:dashed;border-color:rgb(111, 111, 200);border-radius: 15px;">
     {% if user.is_authenticated %}
     <h3 style="text-align: center; margin-top: 90px;">Already logged in!!</h3>
     <p style="margin-top:100px; font-size: medium;text-align: center;">Back to <a href="{% url 'home' %}"> Home Page</a>
