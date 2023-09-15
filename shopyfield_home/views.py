@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 import random
 from django.contrib.auth import authenticate,login,logout
-from .models import Categories,Products,Cart,Address,Payment,Orders
+from .models import Categories,Products,Cart,Address,Payment,Orders,Orderitems
 cartcount=Cart.objects.all().count
 def home(request):
     dict_cate={
@@ -181,12 +181,14 @@ def orders(request):
             prd_rate=i.product.prd_rate
             prd_qty=i.order_qty
         trackingid=str(random.randint(111111,999999))
-        while Orders.objects.filter(trackingid=trackingid):
+        while Orders.objects.filter(user=user):
             trackingid=str(random.randint(111111,999999))
-        neworder=Orders.objects.create(user=user,address=address,rate=totalrate,trackingid=trackingid,product=product,prd_rate=prd_rate,prd_qty=prd_qty)
+        neworder=Orders.objects.create(user=user,address=address,rate=totalrate,trackingid=trackingid)
         neworder.save()
         cart=Cart.objects.filter(user=request.user)
         for i in cart:
+            orderitem=Orderitems.objects.create( orders=neworder,product=product,prd_rate=prd_rate,prd_qty=prd_qty)
+            orderitem.save()
             orderproduct=Products.objects.filter(id=i.product_id).first()
             orderproduct.prd_quantity=int(orderproduct.prd_quantity)-int(i.order_qty)
             orderproduct.save()
@@ -199,7 +201,12 @@ def delorder(request,trackingid):
         orders=Orders.objects.filter(trackingid=trackingid)
         context={'orders':orders,'cat':Categories.objects.all(),'cartcount':cartcount}
         if request.method == 'POST':
-            orders.delete()
+            orderitem=Orderitems.objects.filter(orders=orders)
+            # for i in orders:
+            #     orderproduct=Products.objects.filter(id=i.product_id).first()
+            #     orderproduct.prd_quantity=int(orderproduct.prd_quantity)+int(i.prd_qty)
+            #     orderproduct.save()
+            orders.delete() 
             return redirect('orders')
         return render(request,'homepage/delorder.html',context)
         

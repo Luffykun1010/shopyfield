@@ -51,9 +51,14 @@ class Orders(models.Model):
     address=models.ForeignKey(Address,on_delete=models.CASCADE)
     rate=models.CharField(max_length=200)
     trackingid=models.CharField(max_length=200)
-    product=models.ForeignKey(Products,on_delete=models.CASCADE)
-    prd_rate=models.CharField(max_length=200)
-    prd_qty=models.CharField(max_length=200)
     createdat=models.DateField(auto_now_add=True)
     def __str__(self):
         return self.trackingid     
+
+class Orderitems(models.Model):
+    orders =models.ForeignKey(Orders,on_delete=models.CASCADE)
+    product=models.ForeignKey(Products,on_delete=models.CASCADE)
+    prd_rate=models.CharField(max_length=200)
+    prd_qty=models.CharField(max_length=200)
+    def __str__(self):
+        return self.orders.trackingid
