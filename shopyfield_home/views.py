@@ -77,20 +77,23 @@ def categorypage(request):
     }
     return render(request,'homepage/category.html',dict_cate)
 def cart(request):
-    cart=Cart.objects.filter(user=request.user)
-    totalrate = 0
-    totalquantity = 0
-    for i in cart:
-        totalquantity=int(i.order_qty)+totalquantity
-        totalrate=(int(i.order_qty)*int(i.product.prd_rate)+totalrate)
-    if request.method == 'POST':
-        product_id=request.POST.get('prd_id')
-        if(Cart.objects.filter(user=request.user,product_id=product_id)):
-            order_qty=int(request.POST.get('order_qty'))
-            cart=Cart.objects.get(user=request.user,product_id=product_id)
-            cart.order_qty=order_qty
-            cart.save()
-            return redirect('cart')
+    if request.user.is_authenticated:
+        cart=Cart.objects.filter(user=request.user)
+        totalrate = 0
+        totalquantity = 0
+        for i in cart:
+            totalquantity=int(i.order_qty)+totalquantity
+            totalrate=(int(i.order_qty)*int(i.product.prd_rate)+totalrate)
+            if request.method == 'POST':
+                product_id=request.POST.get('prd_id')
+                if(Cart.objects.filter(user=request.user,product_id=product_id)):
+                    order_qty=int(request.POST.get('order_qty'))
+                    cart=Cart.objects.get(user=request.user,product_id=product_id)
+                    cart.order_qty=order_qty
+                    cart.save()
+                return redirect('cart')
+    else:
+        return redirect('login')
     dict_cart={
         'totalquantity':totalquantity,
         'totalrate':totalrate,
