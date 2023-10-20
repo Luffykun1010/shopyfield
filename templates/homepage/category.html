@@ -3,26 +3,27 @@
 {% block title %}ShoppyField : Categories{% endblock title %}
 {% block content %}
 <div class="row" style="margin-top: 20px;width: 100%;">
-  <div class="col-lg-8 col-sm-10" style="margin-left: 10px;">
+  <div class="col-12" style="margin-left: 10px;">
     <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
     <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;color: black;">Category :</a>
   </div>
   <div class="col-lg-2"></div>
 </div>
-<div class="row" style="margin-top: 30px;width: 100%;">
-  <div class="col-lg-8 col-sm-10" style="margin-left: 10px;">
-    <h2 style="color:  rgb(133, 133, 191);font-family: Georgia, 'Times New Roman', Times, serif;">Categories:</h2>
+<div class="row" style="margin-top: 20px;width: 100%;">
+  <div class="col-12" style="margin-left: 10px;">
+    <h2 style="color:  rgb(133, 133, 191);">Categories:</h2>
   </div>
-  <div class="col-lg-2"></div>
 </div>
-<div class="row" style="width: 100%;margin-bottom: 50px;">
+<div class="row" style="width: 100%;margin-bottom: 50px;margin-top: -45px;">
   {% for d in cat %}
-  <div class="col-lg-2 col-sm-6" style="margin-top: 20px;">
+  <div class="col-lg-4 col-12">
     <div class="card-1">
-      <a href="{% url 'pdtfltr' d.category_code %}" style="text-decoration: none;">
-        <img class="card-img" src="{{d.cat_img.url}}" alt="..." style="height: 285px; width: 100%;">
-        <h5 class="card-title">{{d.cat_name}}</h5>
-      </a>
+      <div style="margin-top: 50px;">
+        <a href="{% url 'pdtfltr' d.category_code %}" style="text-decoration: none;">
+          <img class="card-img" src="{{d.cat_img.url}}" alt="..." style="height: 280px; width: 100%;">
+          <h5 class="card-title" style="margin-left: 10px;">{{d.cat_name}}</h5>
+        </a>
+      </div>
     </div>
   </div>
   {% endfor %}

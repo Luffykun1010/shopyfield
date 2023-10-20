@@ -205,7 +205,7 @@ def delorder(request,trackingid):
             orders=Orders.objects.filter(trackingid=trackingid)
             for i in orders:
                 orderproduct=Products.objects.filter(id=i.product_id).first()
-                orderproduct.prd_quantity=int(orderproduct.prd_quantity)-int(i.order_qty)
+                orderproduct.prd_quantity=int(orderproduct.prd_quantity)-int(i.prd_qty)
                 orderproduct.save()
                 orders.delete() 
             return redirect('orders')
