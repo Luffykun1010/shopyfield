@@ -16,20 +16,25 @@
     </div>
     <div class="col-lg-2"></div>
 </div>
-<div class="row" style="width: 100%;">
-    {% for d in products %}
-    <div class="col-lg-2 col-6" style="margin-top: 10px;">
-        <a href="{% url 'pdtdtls' d.category_code d.product_code %}" style="text-decoration: none;">
-            <div class="card card-1">
-                <div class="card-body">
-                    <img src="{{d.prd_img.url}}" class="card-img" alt="..." style="height: 100%;">
-                    <h5 class="card-title-1">
-                        {{d.prd_name}}</h5>
-                    <h3 class="card-title-1" >₹ {{d.prd_rate}}</h3>
+<div style="margin-left: 10px;">
+    <div class="row" style="width: 100%;">
+        {% for d in products %}
+        <div class="col-lg-2 col-6" style="margin-top: 10px;">
+            <a href="{% url 'pdtdtls' d.category_code d.product_code %}" style="text-decoration: none;">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <img src="{{d.prd_img.url}}" alt="..." style="height: 100%;width:100%;">
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="{{d.prd_img.url}}" alt="..." style="height: 90%;width:100%;margin-top: -260px;opacity: 0.8;">
+                        <h5 style="margin-left: 10px;margin-top: 10px;">{{d.prd_name}}</h5>
+                        <p style="margin-left: 10px;">{{d.seller_company}}</p>
+                        <h3 style="margin-left: 10px;color: red;margin-top: -20px;">₹ {{d.prd_rate}}</h3>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock content %}

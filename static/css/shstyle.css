@@ -59,19 +59,53 @@
   color: rgb(0, 0, 0);
   opacity: 0;
 }
+
 .card-title-1 {
   color: rgb(209, 0, 0);
   opacity: 0;
 }
-.card-1:hover :where(h3,h5) {
+
+.card-1:hover :where(h3, h5) {
   opacity: 100%;
 }
-.card-1 h5{
+
+.card-1 h5 {
   margin-top: -50px;
   margin-left: 10px;
   color: rgb(0, 0, 0);
 }
-.card-1 h3{
+
+.card-1 h3 {
   margin-top: -50px;
   margin-left: 10px;
+}
+
+.flip-card:hover .flip-card-front {
+  transform: rotateY(180deg);
+}
+
+.flip-card:hover .flip-card-back {
+  transform: rotateY(0deg);
+}
+.flip-card{
+  height: 100%;
+  width: 100%;
+}
+.flip-card-back{
+  margin-top: -120px;
+}
+.flip-card-front,
+.flip-card-back {
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
 }
