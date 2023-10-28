@@ -1,0 +1,16 @@
+.card {
+    opacity: 0;
+    width: 25rem;
+    background-color: #ffd60a;
+    margin-top: 10px;
+}
+
+.card.active {
+    opacity: 1;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.disable{
+    margin-top: -400px;    
+    opacity: 0;
+}

@@ -5,7 +5,8 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 import random
 from django.contrib.auth import authenticate,login,logout
-from .models import Categories,Products,Cart,Address,Payment,Orders
+from .models import Categories,Products,Cart,Address,Payment,Orders,Chatbot
+from django.http import JsonResponse
 cartcount=Cart.objects.all().count
 def home(request):
     dict_cate={
@@ -60,7 +61,7 @@ def loginpage(request):
         user = authenticate(username=username,password=password)
         if user is not None:    
             login(request,user)
-            return redirect('home')
+            return redirect('cart')
         else:
             messages.error(request,"Invalid credentials")
             return redirect('login')
@@ -210,4 +211,10 @@ def delorder(request,trackingid):
                 orders.delete() 
             return redirect('orders')
         return render(request,'homepage/delorder.html',context)
-        
+def chatbot(request):
+    
+    chatbot = Chatbot.objects.create(name='Chatbot')
+    message = request.GET.get('message')
+    response = chatbot.process_message(message)
+    return JsonResponse({'response': response})
+    

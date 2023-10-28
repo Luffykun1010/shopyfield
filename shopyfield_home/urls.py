@@ -1,4 +1,5 @@
 from . import views
+from django.contrib.auth import views as auth_views
 from django.urls import path,include
 urlpatterns = [
     path('',views.home,name='home'),
@@ -7,7 +8,7 @@ urlpatterns = [
     path('category/<str:category_code>/<str:product_code>',views.pdtdtls,name='pdtdtls'),
     path('signup',views.signup,name='signup'),
     path('login',views.loginpage,name='login'),
-    path('logout',views.logoutpage,name='logout'),
+    path('logout',auth_views.LogoutView.as_view(),name='logout'),
     path('category',views.categorypage,name='category'),
     path('cart',views.cart,name='cart'),
     path('delcart',views.delcart,name='delcart'),
@@ -18,4 +19,5 @@ urlpatterns = [
     path('payment',views.payment,name='payment'),
     path('change-payment',views.chpayment,name='chpayment'),
     path('booking',views.booking,name='booking'),
+    path('chatbot',views.chatbot,name='chatbot'),
 ]

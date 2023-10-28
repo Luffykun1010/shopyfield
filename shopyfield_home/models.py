@@ -56,4 +56,9 @@ class Orders(models.Model):
     prd_qty=models.CharField(max_length=200)
     createdat=models.DateField(auto_now_add=True)
     def __str__(self):
-        return self.trackingid     
+        return self.trackingid  
+
+class Chatbot(models.Model):
+    name = models.CharField(max_length=255)
+    state = models.TextField()
+    configuration = models.TextField()   
