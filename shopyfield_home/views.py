@@ -211,10 +211,4 @@ def delorder(request,trackingid):
                 orders.delete() 
             return redirect('orders')
         return render(request,'homepage/delorder.html',context)
-def chatbot(request):
-    
-    chatbot = Chatbot.objects.create(name='Chatbot')
-    message = request.GET.get('message')
-    response = chatbot.process_message(message)
-    return JsonResponse({'response': response})
     

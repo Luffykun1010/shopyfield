@@ -19,5 +19,4 @@ urlpatterns = [
     path('payment',views.payment,name='payment'),
     path('change-payment',views.chpayment,name='chpayment'),
     path('booking',views.booking,name='booking'),
-    path('chatbot',views.chatbot,name='chatbot'),
 ]
