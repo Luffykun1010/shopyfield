@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shopyfield_home',
+    'sellers_app'
 ]
 
 MIDDLEWARE = [

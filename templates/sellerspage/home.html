@@ -1,0 +1,43 @@
+{% extends "common2.html" %}
+{% load static %}
+{% block title %}Sellers : Home{% endblock title %}
+{% block content %}
+<div class="container">
+    {% for i in company %}
+    <h1><u>{{i.company_name}}</u></h1>
+    {% endfor %}
+    <h4>Products :</h4>
+    {% for k in products %}
+    {{k.seller_company}}
+    <h6>Products Name : {{k.prd_name}}</h6>
+    <p>Total Stock : {{k.prd_quantity}}</p>
+    {% endfor %}
+    <h4>Orders :</h4>
+    <div class="row bg-success text-light">
+        <div class="col col-head ">Orders Id</div>
+        <div class="col col-head">Ordered By</div>
+        <div class="col col-head">Address</div>
+        <div class="col col-head">Product</div>
+        <div class="col col-head">Products Ordered</div>
+        <div class="col col-head">Tracking Id</div>
+        <div class="col col-head">Total Rate</div>
+        <div class="col col-head">Ordered On</div>
+    </div>
+    {%for j in order%}
+    {% for k in company %}
+    {% if j.product.seller_company == k.company_name %}
+    <div class="row">
+        <div class="col col-head">{{j.id}}</div>
+        <div class="col col-head"><b>{{j.user}}</b></div>
+        <div class="col col-head">{{j.address.user_name}},<br>{{j.address}},<br>{{j.address.user_pincode}},{{j.address.user_state}},<br>{{j.address.user_city}}</div>
+        <div class="col col-head"><b>{{j.product.prd_name}}</b></div>
+        <div class="col col-head">{{j.prd_qty}}</div>
+        <div class="col col-head">{{j.trackingid}}</div>
+        <div class="col col-head">{{j.prd_rate}}</div>
+        <div class="col col-head">{{j.createdat}}</div>
+    </div>
+    {% endif %} 
+    {% endfor %}
+    {% endfor %}
+</div>
+{% endblock content %}

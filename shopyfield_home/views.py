@@ -1,17 +1,17 @@
-from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 import random
 from django.contrib.auth import authenticate,login,logout
-from .models import Categories,Products,Cart,Address,Payment,Orders,Chatbot
+from .models import Categories,Products,Cart,Address,Payment,Orders
 from django.http import JsonResponse
 cartcount=Cart.objects.all().count
 def home(request):
     dict_cate={
         'cartcount':cartcount,
-        'cat':Categories.objects.all()
+        'cat':Categories.objects.all(),
+        'prd':Products.objects.all()
     }
     return render(request,'homepage/home.html',dict_cate)
 def pdtfltr(request,category_code):

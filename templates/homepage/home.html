@@ -2,37 +2,37 @@
 {% load static %}
 {% block title %}ShoppyField,Shop Ur Belly Full{% endblock title %}
 {% block content %}
-<div class="container">
-  <div class="row" style="width: 100%;color:  rgb(133, 133, 191);">
-    <div class="col-md-8 col-12" style="margin-top: 40px;">
-      <img src="{% static '/images/mensimg1.jpeg' %}" class="card-img-top" alt="..." style="height: 400px;width: 100%;">
-    </div>
-    <div class="col-md-4 col-12" style="margin-top: 40px;">
-      <h2 style="color: rgb(133, 133, 191);">Men's Apparel</h2>
-      <p class="card-text" style="font-weight: 500;color: rgb(70, 68, 68);margin-top: 10px;">Men's Apparel covers all
-        types of
-        clothes for men like i.a. coats, (outdoor) jackets, blazers, suits, trousers, shirts, pullovers as well as
-        sports- and underwear. Men's wear is a broad term that encompasses all the clothing that men wear. It includes a
-        wide variety of items, such as suits, shirts, pants, jackets, ties, shoes, and accessories. Men's wear has
-        evolved
-        over time, and the styles that are popular today reflect the current trends in fashion.</p>
+<div style="background-image:linear-gradient(rgba(218, 65, 65, 0.4), rgba(255, 255, 255, 0.2)), url('/static/images/mensimg1.jpeg');margin-top: -16px;height: 80vh;background-size: cover;">
+  <div class="container ">
+    <div class="row" style="width: 100%;color:  rgb(133, 133, 191);">
+      <div class="col-md-8 col-12"></div>
+      <div class="col-md-4 col-12" style="margin-top: 20vh;">
+        <h2 style="color:  rgb(21, 21, 191);">Men's Apparel</h2>
+        <p class="card-text" style="font-weight: 500;color: rgb(0, 0, 0);margin-top: 10px;height: 30vh;overflow: auto;">Men's Apparel covers all
+          types of
+          clothes for men like i.a. coats, (outdoor) jackets, blazers, suits, trousers, shirts, pullovers as well as
+          sports- and underwear. Men's wear is a broad term that encompasses all the clothing that men wear. It includes
+          a
+          wide variety of items, such as suits, shirts, pants, jackets, ties, shoes, and accessories. Men's wear has
+          evolved
+          over time, and the styles that are popular today reflect the current trends in fashion.</p>
+      </div>
     </div>
   </div>
-
 </div>
 <div class="row" style="margin-top: 30px;width: 100%;">
   <div class="col-12" style="margin-left: 10px;">
-    <h2 style="color:  rgb(133, 133, 191);">Categories:</h2>
+    <h2 style="color:  rgb(133, 133, 191);">Products:</h2>
   </div>
 </div>
-<div class="row" style="width: 100%;margin-bottom: 50px;margin-top: -45px;">
-  {% for d in cat %}
-  <div class="col-lg-4 col-12">
+<div class="row" style="width: 100%;margin-bottom: 50px;margin-top: -40px;">
+  {% for d in prd %}
+  <div class="col-lg-2 col-6">
     <div class="card-1">
       <div style="margin-top: 50px;">
-        <a href="{% url 'pdtfltr' d.category_code %}" style="text-decoration: none;">
-          <img class="card-img" src="{{d.cat_img.url}}" alt="..." style="height: 280px; width: 100%;">
-          <h5 class="card-title" style="margin-left: 10px;">{{d.cat_name}}</h5>
+        <a href="{% url 'pdtdtls' d.category_code d.product_code %}" style="text-decoration: none;">
+          <img class="card-img" src="{{d.prd_img.url}}" alt="..." style="height: 40vh; width: 100%;">
+          <h5 class="card-title" style="margin-left: 1vw;">{{d.prd_name}}</h5>
         </a>
       </div>
     </div>

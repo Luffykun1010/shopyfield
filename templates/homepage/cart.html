@@ -40,30 +40,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8 pd_data col-12">
+                        <div class="col-lg-8 col-12">
                             <form action="" method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" class="prd_quantity" name="prd_quantity"
+                                <input type="hidden" id="prd_quantity" class="prd_quantity" name="prd_quantity"
                                     value="{{c.product.prd_quantity}}">
                                 <input type="hidden" class="prd_id" name="prd_id" value="{{c.product_id}}">
                                 <div class="row" style="margin-top: 10px;">
-                                    <div class="col-lg-2 col-2">
-                                        <button class="input-group-text decrement-btn"
-                                            style="border-radius: 8px;">-</button>
+                                    <div class="col-2">
+                                        <button class="input-group-text" onclick="sub()">-</button>
                                     </div>
-                                    <div class="col-lg-3 col-3">
-                                        <input type="text" name="order_qty" class="form-control qty-input text-center"
-                                            value="{{c.order_qty}}"
+                                    <div class="col-7">
+                                        <input type="text" name="order_qty" id="order_qty"
+                                            class="form-control qty-input text-center" value="{{c.order_qty}}"
                                             style="border-radius: 8px;background-color: black;color: white;width: 100%;">
                                     </div>
-                                    <div class="col-lg-2 col-3">
-                                        <button class="input-group-text increment-btn"
-                                            style="border-radius: 8px;">+</button>
+                                    <div class="col-2">
+                                        <button class="input-group-text" onclick="add()">+</button>
                                     </div>
-                                    <div class="col-lg-2 col-2">
-                                        <button type="submit" class="btn btn-warning" style="font-size: x-small;">
-                                            Change quantity </button>
-                                    </div>
+                                    <script>
+                                        var order_qty = document.getElementById("order_qty");
+                                        var prd_quantity = document.getElementById("prd_quantity");
+                                        function add() {
+                                            if (order_qty.value < prd_quantity.value) {
+                                                order_qty.value = parseInt(order_qty.value) + 1;
+                                            }
+                                        }
+                                        function sub() {
+                                            if (order_qty.value > 1) {
+                                                order_qty.value = parseInt(order_qty.value) - 1;
+                                            }
+                                        }
+                                    </script>
                                 </div>
                             </form>
                         </div>
@@ -119,7 +127,8 @@
             {% endfor %}
         </div>
         <div class="col-1"></div>
-        <div class="col-lg-3 col-11" style="border-radius: 9px;background-color: rgb(27, 25, 25);height: 250px;margin-top: 20px;">
+        <div class="col-lg-3 col-11"
+            style="border-radius: 9px;background-color: rgb(27, 25, 25);height: 250px;margin-top: 20px;">
             <div class="row" style="margin-top: 20px;color: white;">
                 <div class="col-lg-1 col-sm-1"></div>
                 <div class="col-lg-10 ">

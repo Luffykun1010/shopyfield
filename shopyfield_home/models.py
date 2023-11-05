@@ -5,6 +5,7 @@ class Categories(models.Model):
     cat_name=models.CharField(max_length=200)
     cat_img=models.ImageField(upload_to='Categories')
     category_code=models.CharField(max_length=200)
+    # created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.cat_name
 
@@ -18,8 +19,11 @@ class Products(models.Model):
     seller_company=models.CharField(max_length=200)
     cat_name=models.ForeignKey(Categories,on_delete=models.CASCADE)
     product_code=models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.prd_name
+    class Meta:
+        ordering = ['-created_at',]
 
 class Cart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -56,9 +60,4 @@ class Orders(models.Model):
     prd_qty=models.CharField(max_length=200)
     createdat=models.DateField(auto_now_add=True)
     def __str__(self):
-        return self.trackingid  
-
-class Chatbot(models.Model):
-    name = models.CharField(max_length=255)
-    state = models.TextField()
-    configuration = models.TextField()   
+        return self.trackingid

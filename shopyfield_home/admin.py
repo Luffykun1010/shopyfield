@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib import admin
 from .models import Categories,Products,Cart,Address,Payment,Orders
 
 admin.site.register(Categories)
