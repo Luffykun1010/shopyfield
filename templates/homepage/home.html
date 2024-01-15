@@ -2,41 +2,138 @@
 {% load static %}
 {% block title %}ShoppyField,Shop Ur Belly Full{% endblock title %}
 {% block content %}
-<div style="background-image:linear-gradient(rgba(218, 65, 65, 0.4), rgba(255, 255, 255, 0.2)), url('/static/images/mensimg1.jpeg');margin-top: -16px;height: 80vh;background-size: cover;">
-  <div class="container ">
-    <div class="row" style="width: 100%;color:  rgb(133, 133, 191);">
-      <div class="col-md-8 col-12"></div>
-      <div class="col-md-4 col-12" style="margin-top: 20vh;">
-        <h2 style="color:  rgb(21, 21, 191);">Men's Apparel</h2>
-        <p class="card-text" style="font-weight: 500;color: rgb(0, 0, 0);margin-top: 10px;height: 30vh;overflow: auto;">Men's Apparel covers all
-          types of
-          clothes for men like i.a. coats, (outdoor) jackets, blazers, suits, trousers, shirts, pullovers as well as
-          sports- and underwear. Men's wear is a broad term that encompasses all the clothing that men wear. It includes
-          a
-          wide variety of items, such as suits, shirts, pants, jackets, ties, shoes, and accessories. Men's wear has
-          evolved
-          over time, and the styles that are popular today reflect the current trends in fashion.</p>
-      </div>
+<div style="display: none;">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/MRvty0llojA?si=b8lavWJxOXCfpcge"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe><iframe width="560" height="315"
+    src="https://www.youtube.com/embed/MRvty0llojA?si=b8lavWJxOXCfpcge" title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+</div>
+<div id="container1">
+  <img class="off-img" src="{% static '/images/offer.jpg' %}" alt="">
+</div>
+<div id="container" style="margin-top: 6em;">
+  <img src="{% static '/images/offer.jpg' %}" alt="" style="width: 100%;">
+</div>
+<div class="container">
+  <div class="row mt-5 mb-3" id="m-heads">
+    <div class="col-md-2 col-lg-3"></div>
+    <div class="col-md-2 col-7 col-lg-2">
+      <h3 class="heads active" onclick="filterSelection('bestsellers')">BESTSELLER</h3>
+    </div>
+    <div class="col-2" id="vldiv">
+      <div class="vl"></div>
+    </div>
+    <div class="col-md-2 col-lg-2 col-5">
+      <h3 class="heads" onclick="filterSelection('latest')">NEW ARRIVAL</h3>
     </div>
   </div>
 </div>
-<div class="row" style="margin-top: 30px;width: 100%;">
-  <div class="col-12" style="margin-left: 10px;">
-    <h2 style="color:  rgb(133, 133, 191);">Products:</h2>
-  </div>
-</div>
-<div class="row" style="width: 100%;margin-bottom: 50px;margin-top: -40px;">
+<div class="row mb-3 d-flex align-items-center justify-content-center">
   {% for d in prd %}
-  <div class="col-lg-2 col-6">
-    <div class="card-1">
-      <div style="margin-top: 50px;">
-        <a href="{% url 'pdtdtls' d.category_code d.product_code %}" style="text-decoration: none;">
-          <img class="card-img" src="{{d.prd_img.url}}" alt="..." style="height: 40vh; width: 100%;">
-          <h5 class="card-title" style="margin-left: 1vw;">{{d.prd_name}}</h5>
-        </a>
-      </div>
-    </div>
+  <div class="col-11 col-md-5 col-lg-2 prds mt-3 latest">
+    <img src="{{d.prd_img.url}}" alt="" style="width: 100%;height: 18em;">
+    <p class="com">{{d.seller_company}}</p>
+    <h5 style="width: 260px;overflow: hidden;height: 25px;">{{d.prd_name}}</h5>
+    <p class="com">{{d.cat_name.sub_cat_name}}</p>
+    <p class="rate">₹ {{d.prd_rate}}</p>
+    <a href="{% url 'pdtdtls' d.cat_name.main_category.category_code d.cat_name.sub_category_code d.product_code %}"><button>VIEW
+        PRODUCT</button></a>
   </div>
   {% endfor %}
+  {% for d in recent %}
+  <div class="col-11 col-md-5 col-lg-2 prds mt-3 bestsellers show">
+    <img src="{{d.prd_img.url}}" alt="" style="width: 100%;height: 18em;">
+    <p class="com">{{d.seller_company}}</p>
+    <h5 style="width: 260px;overflow: hidden;height: 25px;">{{d.prd_name}}</h5>
+    <p class="com">{{d.cat_name.sub_cat_name}}</p>
+    <p class="rate">₹ {{d.prd_rate}}</p>
+    <a href="{% url 'pdtdtls' d.cat_name.main_category.category_code d.cat_name.sub_category_code d.product_code %}"><button>VIEW
+        PRODUCT</button></a>
+  </div>
+  {% endfor %}
+</div>
+<script>
+  var btnContainer = document.getElementById("m-heads");
+  var btns = btnContainer.getElementsByClassName("heads");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function () {
+      var current = document.getElementsByClassName("active");
+      current[0].className = current[0].className.replace(" active", "");
+      this.className += " active";
+    });
+  }
+  function filterSelection(c) {
+    var x, i;
+    x = document.getElementsByClassName("prds");
+    for (i = 0; i < x.length; i++) {
+      w3RemoveClass(x[i], "show");
+      if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+    }
+  }
+  function w3AddClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    console.log(name, element, arr1, arr2)
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.indexOf(arr2[i]) == -1) {
+        element.className += " " + arr2[i];
+      }
+    }
+  }
+  function w3RemoveClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      while (arr1.indexOf(arr2[i]) > -1) {
+        arr1.splice(arr1.indexOf(arr2[i]), 1);
+      }
+    }
+    element.className = arr1.join(" ");
+  }
+</script>
+<div id="container1" class="mt-5 mb-3">
+  <img src="{% static '/images/offer2.jpg' %}" alt="" style="width: 100%;height: 60vh;">
+</div>
+<div id="container" class="mt-5 mb-1">
+  <img src="{% static '/images/offer2.jpg' %}" alt="" style="width: 100%;">
+</div>
+<div class="row mt-5" id="m-heads">
+  <div class="col-1"></div>
+  <div class="col-md-10 col-12 text-center">
+    <h3 class="heads active">CATEGORIES</h3>
+  </div>
+</div>
+<div class="row mt-3 mb-5 d-flex align-items-center justify-content-center">
+  {% for d in main_cat %}
+  <div class="col-11 col-md-5 col-lg-2 mt-2" id="cates">
+    <a href="{% url 'subcat' d.category_code %}" style="text-decoration: none;color: #6c757d;">
+      <img src="{{d.cat_img.url}}" alt="" style="width: 100%;height: 15em;">
+      <h5 style="text-align: center;margin-top: 0.2em;">{{d.cat_name}}</h5>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+<div class="row mt-5 mb-5">
+  <div class="col-1 col-lg-2"></div>
+  <div class="col-md-5" id="imgnike">
+    <div class="container">
+      <img src="{% static '/images/nike banner.png' %}" alt="" style="width: 100%;height: 32em;">
+    </div>
+  </div>
+  <div class="col-md-5 col-lg-3 col-11 cats mb-5">
+    <img src="{{latest.prd_img.url}}" alt="" style="width: 100%;height: 23em;">
+    <p class="com">{{latest.seller_company}}</p>
+    <h5 style="width: 260px;overflow: hidden;height: 25px;">{{latest.prd_name}}</h5>
+    <p class="com">{{latest.cat_name.sub_cat_name}}</p>
+    <p class="rate">₹ {{latest.prd_rate}}</p>
+    <a
+      href="{% url 'pdtdtls' latest.cat_name.main_category.category_code latest.cat_name.sub_category_code latest.product_code %}"><button>VIEW
+        PRODUCT</button></a>
+  </div>
 </div>
 {% endblock content %}

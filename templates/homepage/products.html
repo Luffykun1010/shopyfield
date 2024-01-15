@@ -1,33 +1,51 @@
 {% extends 'common.html' %}
-{% block title %}ShoppyField : {{category_name}}{% endblock title %}
+{% block title %}ShoppyField : {{cats.sub_cat_name}}{% endblock title %}
 {% block content %}
-<div class="row" style="margin-top: 20px;width: 100%;">
-    <div class="col-12" style="margin-left: 10px;">
-        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-        <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;">Category /</a>
-        <a href="{% url 'pdtfltr' category_name %}"
-            style="margin-left: 10px;text-decoration: none;color: black;">{{category_name}} :</a>
-    </div>
+<div class="row" style="margin-top: 8em;width: 100%;">
+  <div class="col-12" style="margin-left: 10px;">
+    <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+    <a href="{% url 'category' %}" style="text-decoration: none;">All Categories /</a>
+    <a href="{% url 'subcat' main_cats %}" style="text-decoration: none;">{{main_cats}} /</a>
+    <a href="{% url 'pdtfltr' main_cats.category_code cats.sub_category_code %}"
+      style="text-decoration: none;color: #6c757d;">{{cats.sub_cat_name}} :</a>
+  </div>
 </div>
-<div class="row" style="margin-top: 20px;width: 100%;">
-    <div class="col-12" style="margin-left: 10px;">
-        <h2 style="color:  rgb(133, 133, 191);font-family: Georgia, 'Times New Roman', Times, serif;">{{category_name}}:
-        </h2>
+<div class="row">
+  <div class="col-12 mt-4" style="margin-left: 10px;">
+    <h2 style="color:  #6c757d;">{{cats.sub_cat_name}}:</h2>
+  </div>
+  <div class="col-lg-2"></div>
+</div>{% comment %} {% url 'pdtdtls' d.category_code d.product_code %} {% endcomment %}
+<div id="container1">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="row">
+        {% for d in products %}
+        <div class="col-lg-2 col-6 cats mt-4 mb-5">
+          <img src="{{d.prd_img.url}}" alt="" style="width: 100%;height: 15em;margin-top: 0.5em;border: 2px solid #6c757d;">
+          <p class="com">{{d.seller_company}}</p>
+          <h5 style="width: 260px;overflow: hidden;height: 25px;">{{d.prd_name}}</h5>
+          <p class="com">{{d.cat_name.sub_cat_name}}</p>
+          <p class="rate">₹ {{d.prd_rate}}</p>
+          <a href="{% url 'pdtdtls' main_cats cats.sub_category_code d.product_code %}"><button>VIEW PRODUCT</button></a>
+        </div>
+      {% endfor %}
     </div>
-    <div class="col-lg-2"></div>
-</div>
-<div class="row" style="width: 100%;margin-bottom: 50px;margin-top: -40px;">
-  {% for d in products %}
-  <div class="col-lg-2 col-6">
-    <div class="card-1">
-      <div style="margin-top: 50px;">
-        <a href="{% url 'pdtdtls' d.category_code d.product_code %}" style="text-decoration: none;">
-          <img class="card-img" src="{{d.prd_img.url}}" alt="..." style="height: 40vh; width: 100%;">
-          <h5 class="card-title" style="margin-left: 1vw;">{{d.prd_name}}</h5>
-        </a>
-      </div>
     </div>
   </div>
+</div>
+<div class="container" id="container">
+  {% for d in products %}
+  <div class="cats">
+    <img src="{{d.prd_img.url}}" alt="" style="width: 100%;height: 18em;margin-top: 0.5em;border: 2px solid #6c757d;">
+      <p class="com">{{d.seller_company}}</p>
+      <h5 style="width: 260px;overflow: hidden;height: 25px;">{{d.prd_name}}</h5>
+      <p class="com">{{d.cat_name.sub_cat_name}}</p>
+      <p class="rate">₹ {{d.prd_rate}}</p>
+      <a href="{% url 'pdtdtls' main_cats cats.sub_category_code d.product_code %}"><button>VIEW PRODUCT</button></a>
+  </div>
+  <hr>
   {% endfor %}
 </div>
 {% endblock content %}

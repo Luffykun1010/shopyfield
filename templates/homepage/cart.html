@@ -3,44 +3,41 @@
 {% block title %}ShoppyField : Cart{% endblock title %}
 {% block content %}
 <div class="container">
-    <div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="row" style="margin-top: 8em;width: 100%;">
         <div class="col-lg-1"></div>
         <div class="col-lg-11 col-12">
             <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-            <a href="{% url 'cart' %}" style="margin-left: 10px;text-decoration: none;color: black;">Cart :</a>
+            <a href="{% url 'cart' %}" style="text-decoration: none;color: #6c757d;">Cart :</a>
         </div>
     </div>
     {% if user.is_authenticated %}
     {% if cart %}
-    <div class="row" style="width: 100%; margin-bottom: 10px;">
-        <div class="col-lg-1 col-1"></div>
-        <div class="col-lg-6 col-11" style="background-color: rgb(27, 25, 25);border-radius: 9px;margin-top: 20px;">
-            {% for c in cart %}
-            <div class="row" style="margin-top: 20px;margin-bottom: 10px;">
-                <div class="col-lg-3 col-12" style="margin-top: 10px;">
-                    <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
-                        style="height: 180px;width: 100%;border-radius: 10px;">
-                </div>
-                <div class="col-lg-9 col-12" style="margin-top: 10px;">
-                    {% for d in cat %}
-                    {% if d.category_code == c.product.category_code %}
-                    <a href="{% url 'pdtdtls' d.category_code c.product.product_code %}" style="text-decoration: none;">
-                        <h4 style="color: rgb(154, 249, 10);">{{c.product.prd_name}}</h4>
-                    </a>
-                    {% endif %}
-                    {% endfor %}
-                    <div class="row" style="margin-top: 10px;">
-                        <div class="col-lg-4 col-12">
-                            <div class="row">
-                                <div class="col-6 col-lg-12">
-                                    <h5 style="color:  rgb(255, 255, 255);"> ₹ {{c.product.prd_rate}}</h5>
-                                </div>
-                                <div class="col-6 col-lg-12">
-                                    <h5 style="color:  rgb(255, 255, 255);">Quantity: {{c.order_qty}}</h5>
-                                </div>
-                            </div>
+    <div id="container1">
+        <div class="row" style="width: 100%;">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-6">
+                <div id="cart_prd">
+                    {% for c in cart %}
+                    <div class="row mt-2 mb-3">
+                        <div class="col-lg-2 mt-3">
+                            <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
+                                style="height: 6.5em;width: 100%;border-radius: 10px;margin-left: 0.6em;">
                         </div>
-                        <div class="col-lg-8 col-12">
+                        <div class="col-lg-5 col-7" style="margin-top: 10px;">
+                            {% if cart_1.category_code == c.product.category_code %}
+                            {% comment %} {% url 'pdtdtls' d.category_code c.product.product_code %} {% endcomment %}
+                            <a href="" style="text-decoration: none;">
+                                <h4 style="color: #FEFAE0;">{{c.product.prd_name}}</h4>
+                            </a>
+                            {% endif %}
+                            <h5 style="color:  #e9edc9;font-size: 11pt;"> ₹ {{c.product.prd_rate}}</h5>
+                            <h5 style="color:  #e9edc9;font-size: 11pt;">Quantity: {{c.order_qty}}</h5>
+                            {% comment %} {% url 'pdtfltr' d.category_code %} {% endcomment %}
+                            {% if cart.1.category_code == c.product.category_code %}
+                            <a href="">Add more item</a>
+                            {% endif %}
+                        </div>
+                        <div class="col-lg-5 col-12" style="margin: 1em 0;">
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" id="prd_quantity" class="prd_quantity" name="prd_quantity"
@@ -48,44 +45,36 @@
                                 <input type="hidden" class="prd_id" name="prd_id" value="{{c.product_id}}">
                                 <div class="row" style="margin-top: 10px;">
                                     <div class="col-2">
-                                        <button class="input-group-text" onclick="sub()">-</button>
+                                        <button class="input-group-text" onclick="sub()"
+                                            style="background: transparent;color: #e9edc9;">-</button>
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col-8">
                                         <input type="text" name="order_qty" id="order_qty"
                                             class="form-control qty-input text-center" value="{{c.order_qty}}"
-                                            style="border-radius: 8px;background-color: black;color: white;width: 100%;">
+                                            style="border-radius: 8px;background-color: transparent;color: #e9edc9;width: 100%;margin-left: 0.5em;">
                                     </div>
                                     <div class="col-2">
-                                        <button class="input-group-text" onclick="add()">+</button>
+                                        <button class="input-group-text" onclick="add()"
+                                            style="background: transparent;color: #e9edc9;">+</button>
                                     </div>
-                                    <script>
-                                        var order_qty = document.getElementById("order_qty");
-                                        var prd_quantity = document.getElementById("prd_quantity");
-                                        function add() {
-                                            if (order_qty.value < prd_quantity.value) {
-                                                order_qty.value = parseInt(order_qty.value) + 1;
-                                            }
-                                        }
-                                        function sub() {
-                                            if (order_qty.value > 1) {
-                                                order_qty.value = parseInt(order_qty.value) - 1;
-                                            }
-                                        }
-                                    </script>
                                 </div>
+                                <script>
+                                    var order_qty = document.getElementById("order_qty");
+                                    var prd_quantity = document.getElementById("prd_quantity");
+                                    function add() {
+                                        if (order_qty.value < prd_quantity.value) {
+                                            order_qty.value = parseInt(order_qty.value) + 1;
+                                        }
+                                    }
+                                    function sub() {
+                                        if (order_qty.value > 1) {
+                                            order_qty.value = parseInt(order_qty.value) - 1;
+                                        }
+                                    }
+                                </script>
                             </form>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 15px;margin-bottom: 10px;">
-                        <div class="col-6 col-lg-7">
-                            {% for d in cat %}
-                            {% if d.category_code == c.product.category_code %}
-                            <a href="{% url 'pdtfltr' d.category_code  %}">Add more item</a>
-                            {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="col-6 col-lg-5">
-                            <button type="button" style="background-color: rgb(255, 0, 0);height: 100%;color: white;"
+                            <button type="button"
+                                style="background-color: rgb(255, 0, 0);height: 3em;color: white;margin-top: 1em;width: 100%;border-radius: 0.5em;"
                                 class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Remove item
                             </button>
@@ -99,8 +88,7 @@
                                                     "{{c.product.prd_name}}" </b> from cart? <br><br>The following
                                                 related
                                                 items will be
-                                                deleted: <br> Item : <b><i>{{c.product.prd_name}}</i></b><br> Quantity :
-                                                <b><i>{{c.order_qty}}</i></b>
+                                                deleted: <br> Item : <b><i>{{c.product.prd_name}}</i></b>
                                             </p>
                                         </div>
                                         <div class="modal-footer">
@@ -119,47 +107,128 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
-                        <div class="col-lg-2"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-lg-3 col-11" id="cart_tot">
+                <div class="row" style="margin-top: 20px;color: white;">
+                    <div class="col-lg-1 col-1"></div>
+                    <div class="col-10">
+                        <h4>Details</h4>
+                        <hr>
+                        <p>Total quantity : <b>{{ totalquantity }}</b></p>
+                        <p>Total rate : ₹ <b>{{ totalrate }}</b></p>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 1em;">
+                    <div class="col-1"></div>
+                    <div class="col-lg-11 col-10">
+                        <a href="{% url 'booking' %}">
+                            <button type="submit">ORDER
+                                NOW</button></a>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+            <div class="col-lg-1"></div>
         </div>
-        <div class="col-1"></div>
-        <div class="col-lg-3 col-11"
-            style="border-radius: 9px;background-color: rgb(27, 25, 25);height: 250px;margin-top: 20px;">
-            <div class="row" style="margin-top: 20px;color: white;">
-                <div class="col-lg-1 col-sm-1"></div>
-                <div class="col-lg-10 ">
-                    <h4>Details</h4>
-                    <hr>
-                    <p>Total quantity : <b>{{ totalquantity }}</b></p>
-                    <p>Total rate : ₹ <b>{{ totalrate }}</b></p>
+    </div>
+    <div id="container">
+        <div class="container">
+            <div id="cart_prd">
+                {% for c in cart %}
+                <div class="row mt-2 mb-3">
+                    <div class="col-5 mt-3">
+                        <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
+                            style="height: 6.5em;width: 100%;border-radius: 10px;margin-left: 0.6em;">
+                    </div>
+                    <div class="col-7" style="margin-top: 10px;">
+                        {% if cart_1.category_code == c.product.category_code %}
+                        {% comment %} {% url 'pdtdtls' d.category_code c.product.product_code %} {% endcomment %}
+                        <a href="" style="text-decoration: none;">
+                            <h4 style="color: #FEFAE0;">{{c.product.prd_name}}</h4>
+                        </a>
+                        {% endif %}
+                        <h5 style="color:  #e9edc9;font-size: 11pt;"> ₹ {{c.product.prd_rate}}</h5>
+                        <h5 style="color:  #e9edc9;font-size: 11pt;">Quantity: {{c.order_qty}}</h5>
+                        {% comment %} {% url 'pdtfltr' d.category_code %} {% endcomment %}
+                        {% if cart.1.category_code == c.product.category_code %}
+                        <a href="">Add more item</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-10" style="margin: 1em 0;">
+                        <button type="button"
+                            style="background-color: rgb(255, 0, 0);height: 3em;color: white;margin-top: 1em;width: 100%;border-radius: 0.5em;"
+                            class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                            Remove item
+                        </button>
+                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-body">
+                                        <p style="color: white;">Are you sure you want to remove the item <b>
+                                                "{{c.product.prd_name}}" </b> from cart? <br><br>The following
+                                            related
+                                            items will be
+                                            deleted: <br> Item : <b><i>{{c.product.prd_name}}</i></b>
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <form action="delcart" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" style="color: rgb(0, 0, 0);" class="prd_id"
+                                                name="prd_id" value="{{c.product_id}}">
+                                            <input type="hidden" name="order_qty" class="order_qty"
+                                                value="{{c.order_qty}}">
+                                            <button type="submit" class="btn-primary"
+                                                style="height: 40px;border-color: white;border-style: none;color: white;border-radius: 4px;">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="cart_tot">
+                <div class="row" style="margin-top: 20px;color: white;">
+                    <div class="col-1"></div>
+                    <div class="col-10 mt-3">
+                        <h4>Details</h4>
+                        <hr>
+                        <p>Total quantity : <b>{{ totalquantity }}</b></p>
+                        <p>Total rate : ₹ <b>{{ totalrate }}</b></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10" style="margin-bottom: 1em;" >
+                        <a href="{% url 'booking' %}">
+                            <button type="submit">ORDER
+                                NOW</button></a>
+                    </div>
                 </div>
             </div>
-            <div class="row" style="margin-top: 10px;color: white;">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10">
-                    <a href="{% url 'booking' %}">
-                        <button type="submit"
-                            style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 100%;height: 50px;font-weight: 600;">ORDER
-                            NOW</button></a>
-                </div>
-            </div>
         </div>
-        <div class="col-lg-1"></div>
     </div>
     {% else %}
     <div class="row" style="margin-top: 30px;width: 100%;margin-bottom: 50px;">
-        <div class="col-lg-5"></div>
-        <div class="col-lg-2">
-            <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;">
+        <div class="col-lg-4 col-1"></div>
+        <div class="col-lg-4 col-11">
+            <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;mix-blend-mode: multiply;">
             <h5
                 style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
                 Your cart is empty!</h5>
         </div>
-        <div class="col-lg-5"></div>
     </div>
 </div>
 {% endif %}

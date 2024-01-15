@@ -1,32 +1,34 @@
 {% extends 'common.html' %}
-{% block title %}ShoppyField : {{product_name}}{% endblock title %}
+{% block title %}ShoppyField : {{product}}{% endblock title %}
 {% block content %}
-<div class="container">
-    <div class="row" style="margin-top: 20px;width: 100%;">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-11 col-12">
-            <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-            <a href="{% url 'category' %}" style="margin-left: 5px;text-decoration: none;">Category /</a>
-            <a href="{% url 'pdtfltr' category_name %} "
-                style="margin-left: 5px;text-decoration: none;">{{category_name}}
-                /</a>
-            {% for d in products %}
-            <a href="{% url 'pdtdtls' d.category_code d.product_code %}"
-                style="margin-left: 5px;text-decoration: none;color: black;">{{product_name}} :</a>
-            {% endfor %}
-        </div>
-    </div>
-    {% for d in products %}
-    <div class="row" style="margin-top: 20px;width: 100%;">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-3 col-5">
+{% for d in products %}
+<div class="prd_dtl">
+    <div class="row" style="margin-top: 10em;width: 100%;">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3" style="margin-bottom: 10px;">
             <div class="card" style="border-color: rgb(111, 111, 200);">
                 <div class="card-body">
-                    <img src="{{d.prd_img.url}}" class="card-img-top" alt="..." style="height: 260px;">
+                    <img src="{{d.prd_img.url}}" class="card-img-top" alt="..." style="height: 25em;">
                 </div>
             </div>
-            <div class="card pd_data" style="border-color: rgb(111, 111, 200);margin-top: 20px;">
-                <div class="card-body">
+        </div>
+        <div class="col-lg-5" id="prd_dtl">
+            <div class="container">
+                <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+                <a href="{% url 'category' %}" style="text-decoration: none;">All Categories /</a>
+                <a href="{% url 'subcat' main_cats %}" style="text-decoration: none;">{{main_cats}} /</a>
+                <a href="{% url 'pdtfltr' main_cats.category_code cats.sub_category_code %}"
+                    style="text-decoration: none;">{{cats.sub_cat_name}} /</a>
+                <a href="{% url 'pdtdtls' main_cats cats product.product_code %}"
+                    style="margin-left: 5px;text-decoration: none;color: black;">{{product}}:</a>
+                <h2>{{d.prd_name}}</h2>
+                <p class="comp">{{d.seller_company}}</p>
+                {% if d.prd_quantity < 0 %} <p
+                    style="color: rgb(0, 0, 0);margin-top: -10px;background-color: rgb(48, 198, 65);border-radius: 5px;width: 80px;text-align: center;color: white;font-weight: 600;">
+                    No stock</p>
+                    {% endif %}
+                    <h3>₹ {{d.prd_rate}}</h3>
+                    <p class="comp">Inclusive of all taxes</p>
                     <form action="" method="POST">
                         {% if d.prd_quantity > 0 %}
                         {% csrf_token %}
@@ -34,12 +36,10 @@
                             <input type="hidden" class="prd_quantity" name="prd_quantity" value="{{d.prd_quantity}}">
                             <input type="hidden" name="prd_id" value="{{d.id}}">
                             <input type="hidden" name="prd_name" value="{{d.prd_name}}">
-                            <button class="input-group-text decrement-btn btn-primary">-</button>
-                            <input type="text" name="order_qty" class="form-control qty-input text-center" value="1">
-                            <button class="input-group-text increment-btn btn-primary">+</button>
+                            <input type="hidden" name="order_qty" value="1">
                         </div>
                         <button type="submit"
-                            style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 100%;height: 50px;font-weight: 600;">ADD
+                            style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 85%;height: 50px;font-weight: 600;border-radius: 0.5em;">ADD
                             TO CART</button>
                         {% for message in messages %}
                         <div class="alert alert-{{ message.tags }} alert-dismissible  fade show"
@@ -52,43 +52,93 @@
                         {% endfor %}
                         {% else %}
                         <label
-                            style=" background-color: rgb(31, 222, 53); color: white;border-style: none;width: 100%;height: 40px;font-weight: 600;text-align: center;padding-top: 8px;">
+                            style=" background-color: rgb(31, 222, 53); color: white;border-style: none;width: 85%;height: 40px;font-weight: 600;text-align: center;padding-top: 8px;border-radius: 0.5em;">
                             OUT OF STOCK</label>
                         {% endif %}
                     </form>
-                </div>
+                    <hr style="width: 85%;margin-top: 2em;">
+                    <details id="prd_desc">
+                        <summary>Product Description :</summary>
+                        <p style="font-family: 'Times New Roman', Times, serif;">{{d.prd_desc}}</p>
+                    </details>
+                    <hr style="width: 85%;">
+                    <details id="prd_desc">
+                        <summary>FAQs :</summary>
+                        <p style="font-family: 'Times New Roman', Times, serif;">Lorem ipsum dolor, sit amet consectetur
+                            adipisicing elit. Facilis sit inventore nemo repellat corrupti adipisci corporis at
+                            voluptatibus aliquam maiores distinctio tempore praesentium placeat, earum exercitationem
+                            quod nam hic molestiae!</p>
+                    </details>
+                    <hr style="width: 85%;">
             </div>
         </div>
-        <div class="col-7">
-            <div class="card pd_data" style="border-color: rgb(111, 111, 200);">
-                <div class="card-body">
-                    <h2 style="font-family: monospace;font-weight:600;">{{d.prd_name}}</h2>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-lg-3 col-12">
-                            <p style="color: rgb(0, 0, 0);">Company Name : <b> {{d.seller_company}}</b></p>
-                            {% if d.prd_quantity > 0 %}
-                            <p style="color: rgb(0, 0, 0);margin-top: -15px;">In stock : <b>{{d.prd_quantity}}</b> pcs
-                            </p>
-                            {% else %}
-                            <p
-                                style="color: rgb(0, 0, 0);margin-top: -10px;background-color: rgb(48, 198, 65);border-radius: 5px;width: 80px;text-align: center;color: white;font-weight: 600;">
-                                No stock</p>
-                            {% endif %}
-                            <h3 style="color: rgb(221, 8, 8);margin-top: 40px;">₹ {{d.prd_rate}}</h3>
-                        </div>
-                        <div class="col-lg-1">
-                            <h4 style="border-left: 2px solid rgb(111, 111, 200);height: 95%;"></h4>
-                        </div>
-                        <div class="col-lg-8 col-12">
-                            <p style="font-family: 'Times New Roman', Times, serif;font-size: large;">{{d.prd_desc}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2"></div>
+    </div>
+    <div class="col-lg-8 col-12">
     </div>
     {% endfor %}
 </div>
-
+{% for d in products %}
+<div class="mob_prd_dtl">
+    <div class="container">
+        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+        <a href="{% url 'category' %}" style="text-decoration: none;">All Categories /</a>
+        <a href="{% url 'subcat' main_cats %}" style="text-decoration: none;">{{main_cats}} /</a>
+        <a href="{% url 'pdtfltr' main_cats.category_code cats.sub_category_code %}"
+            style="text-decoration: none;">{{cats.sub_cat_name}} /</a>
+        <a href="{% url 'pdtdtls' main_cats cats product.product_code %}"
+            style="margin-left: 5px;text-decoration: none;color: black;">{{product}}:</a>
+        <div id="mob_prd_dtl">
+            <img src="{{d.prd_img.url}}" class="card-img-top" alt="..." style="height: 18em;margin-top: 0.5em;">
+            <h2>{{d.prd_name}}</h2>
+            <p class="mob_comp">{{d.seller_company}}</p>
+            {% if d.prd_quantity < 0 %} <p
+                style="color: rgb(0, 0, 0);margin-top: -10px;background-color: rgb(48, 198, 65);border-radius: 5px;width: 80px;text-align: center;color: white;font-weight: 600;">
+                No stock</p>
+                {% endif %}
+                <h3>₹ {{d.prd_rate}}</h3>
+                <p class="mob_comp">Inclusive of all taxes</p>
+                <form action="" method="POST">
+                    {% if d.prd_quantity > 0 %}
+                    {% csrf_token %}
+                    <div class="input-group text-center mb-4">
+                        <input type="hidden" class="prd_quantity" name="prd_quantity" value="{{d.prd_quantity}}">
+                        <input type="hidden" name="prd_id" value="{{d.id}}">
+                        <input type="hidden" name="prd_name" value="{{d.prd_name}}">
+                        <input type="hidden" name="order_qty" value="1">
+                    </div>
+                    <button type="submit"
+                        style="background-color: rgb(255, 136, 0); color: white;border-style: none;width: 100%;height: 50px;font-weight: 600;border-radius: 0.5em;">ADD
+                        TO CART</button>
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible  fade show"
+                        style="margin-bottom: -40px;margin-top: -13px;margin-left: -15px;">
+                        <p style="font-size: medium;color:red;"><b>Alert :</b> {{message}} <br> Stock
+                            quantity :
+                            <b>{{d.prd_quantity}}</b>
+                        </p>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <label
+                        style=" background-color: rgb(31, 222, 53); color: white;border-style: none;width: 100%;height: 40px;font-weight: 600;text-align: center;padding-top: 8px;border-radius: 0.5em;">
+                        OUT OF STOCK</label>
+                    {% endif %}
+                </form>
+                <hr style="width: 100%;margin-top: 2em;">
+                <details id="mob_prd_desc">
+                    <summary>Product Description:</summary>
+                    <p style="font-family: 'Times New Roman', Times, serif;">{{d.prd_desc}}</p>
+                </details>
+                <hr style="width: 100%;">
+                <details id="mob_prd_desc">
+                    <summary>FAQs:</summary>
+                    <p style="font-family: 'Times New Roman', Times, serif;">Lorem ipsum dolor, sit amet consectetur
+                        adipisicing elit. Facilis sit inventore nemo repellat corrupti adipisci corporis at
+                        voluptatibus aliquam maiores distinctio tempore praesentium placeat, earum exercitationem
+                        quod nam hic molestiae!</p>
+                </details>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock content %}

@@ -4,40 +4,31 @@
 {% block content %}
 <div class="container">
     {% for i in company %}
-    <h1><u>{{i.company_name}}</u></h1>
+    <h4>{{i.company_name}}</h4>
     {% endfor %}
-    <h4>Products :</h4>
-    {% for k in products %}
-    {{k.seller_company}}
-    <h6>Products Name : {{k.prd_name}}</h6>
-    <p>Total Stock : {{k.prd_quantity}}</p>
-    {% endfor %}
-    <h4>Orders :</h4>
-    <div class="row bg-success text-light">
-        <div class="col col-head ">Orders Id</div>
-        <div class="col col-head">Ordered By</div>
-        <div class="col col-head">Address</div>
-        <div class="col col-head">Product</div>
-        <div class="col col-head">Products Ordered</div>
-        <div class="col col-head">Tracking Id</div>
-        <div class="col col-head">Total Rate</div>
-        <div class="col col-head">Ordered On</div>
+    <div class="container">
+        <div class="row" style="width: 100%;margin-bottom: 2vh;">
+            <div class="col-md-6 col-12" style="margin-top: 2vh;">
+                <a  href="{% url "sellers_prd" %}" style="text-decoration: none;">
+                    <div class="card" style="border-radius: 3vh;border-color: rgb(255, 136, 0);border-width: 15px;">
+                        <div class="card-body"
+                            style="background-image: linear-gradient(rgba(218, 65, 65, 0.4), rgba(255, 255, 255, 0.2)), url('/static/images/shoesimg.jpeg');border-radius: 1vh;height: 50vh;background-position: center;flex: 1;">
+                            <h3 style="margin-top: 40vh;color: rgb(255, 136, 0);">Products</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-12" style="margin-top: 2vh;">
+                <a  href="{% url "sellers_orders" %}" style="text-decoration: none;">
+                    <div class="card" style="border-radius: 3vh;border-color: rgb(255, 136, 0);border-width: 15px;">
+                        <div class="card-body"
+                            style="background-image: linear-gradient(rgba(163, 162, 216, 0.309), rgba(31, 28, 201, 0.309)), url('/static/images/bookimg.jpg');border-radius: 1vh;height: 50vh;background-position: center;flex: 1;">
+                            <h3 style="margin-top: 40vh;color: rgb(255, 136, 0);">Orders</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-    {%for j in order%}
-    {% for k in company %}
-    {% if j.product.seller_company == k.company_name %}
-    <div class="row">
-        <div class="col col-head">{{j.id}}</div>
-        <div class="col col-head"><b>{{j.user}}</b></div>
-        <div class="col col-head">{{j.address.user_name}},<br>{{j.address}},<br>{{j.address.user_pincode}},{{j.address.user_state}},<br>{{j.address.user_city}}</div>
-        <div class="col col-head"><b>{{j.product.prd_name}}</b></div>
-        <div class="col col-head">{{j.prd_qty}}</div>
-        <div class="col col-head">{{j.trackingid}}</div>
-        <div class="col col-head">{{j.prd_rate}}</div>
-        <div class="col col-head">{{j.createdat}}</div>
-    </div>
-    {% endif %} 
-    {% endfor %}
-    {% endfor %}
 </div>
 {% endblock content %}

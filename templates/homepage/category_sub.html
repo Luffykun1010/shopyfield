@@ -1,0 +1,43 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block title %}ShoppyField : Categories{% endblock title %}
+{% block content %}
+<div class="row" style="margin-top: 8em;width: 100%;">
+    <div class="col-12" style="margin-left: 10px;">
+        <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
+        <a href="{% url 'category' %}" style="text-decoration: none;"> All Categories / </a>
+        <a href="{% url 'subcat' main_cats %}" style="text-decoration: none;color: #6c757d;">{{main_cats}} :</a>
+    </div>
+</div>
+<div class="categories">
+    <div class="row">
+        <div class="col-12" style="margin-left: 10px;">
+            <h2>{{main_cats}}:</h2>
+        </div>
+    </div>
+</div>
+<div class="container" id="container">
+    {% for d in cats %}
+    <div id="cates">
+        <a href="{% url 'pdtfltr' main_cats.category_code d.sub_category_code %}">
+            <img class="card-img" src="{{d.main_category.cat_img.url}}" alt="..." style="height: 18em; width: 100%;">
+            <h5 class="card-title text-center">{{d.sub_cat_name}}</h5>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<div id="container1">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        {% for d in cats %}
+        <div class="col-lg-3 col-12 col-md-6" id="cates">
+            <a href="{% url 'pdtfltr' main_cats.category_code d.sub_category_code %}">
+                <img class="card-img" src="{{d.main_category.cat_img.url}}" alt="..."
+                    style="height: 18em; width: 100%;">
+                <h5 class="card-title text-center">{{d.sub_cat_name}}</h5>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

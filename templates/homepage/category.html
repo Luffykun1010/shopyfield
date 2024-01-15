@@ -2,30 +2,39 @@
 {% load static %}
 {% block title %}ShoppyField : Categories{% endblock title %}
 {% block content %}
-<div class="row" style="margin-top: 20px;width: 100%;">
+<div class="row" style="margin-top: 8em;width: 100%;">
   <div class="col-12" style="margin-left: 10px;">
     <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-    <a href="{% url 'category' %}" style="margin-left: 10px;text-decoration: none;color: black;">Category :</a>
-  </div>
-  <div class="col-lg-2"></div>
-</div>
-<div class="row" style="margin-top: 20px;width: 100%;">
-  <div class="col-12" style="margin-left: 10px;">
-    <h2 style="color:  rgb(133, 133, 191);">Categories:</h2>
+    <a href="{% url 'category' %}" style="text-decoration: none;color: #6c757d;">Category :</a>
   </div>
 </div>
-<div class="row" style="width: 100%;margin-bottom: 70px;margin-top: -45px;">
-  {% for d in cat %}
-  <div class="col-lg-4 col-12">
-    <div class="card-1">
-      <div style="margin-top: 50px;">
-        <a href="{% url 'pdtfltr' d.category_code %}" style="text-decoration: none;">
-          <img class="card-img" src="{{d.cat_img.url}}" alt="..." style="height: 280px; width: 100%;">
-          <h5 class="card-title" style="margin-left: 10px;">{{d.cat_name}}</h5>
-        </a>
-      </div>
+<div class="categories">
+  <div class="row">
+    <div class="col-12" style="margin-left: 10px;">
+      <h2>Categories:</h2>
     </div>
   </div>
+</div>
+<div class="container" id="container">
+  {% for d in main_cat %}
+  <div id="cates">
+    <a href="{% url 'subcat' d.category_code %}">
+    <img class="card-img" src="{{d.cat_img.url}}" alt="..." style="height: 18em;width: 100%;">
+    <h5 class="card-title text-center mb-4">{{d.cat_name}}</h5></a>
+  </div>
   {% endfor %}
+</div>
+<div id="container1">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    {% for d in main_cat %}
+    <div class="col-lg-2 col-12 col-md-6 mb-4" id="cates">
+      <a href="{% url 'subcat' d.category_code %}">
+      <img class="card-img" src="{{d.cat_img.url}}" alt="..." style="height: 18em; width: 100%;">
+      <h5 class="card-title text-center">{{d.cat_name}}</h5>
+    </a>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock content %}

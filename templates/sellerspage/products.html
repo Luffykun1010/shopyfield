@@ -1,0 +1,61 @@
+{% extends "common2.html" %}
+{% load static %}
+{% block title %}Sellers : Products{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 20px;width: 100%;">
+        <div class="col-12" style="margin-left: 10px;">
+          <a href="{% url 'sellers_home' %}" style="text-decoration: none;">Home / </a>
+          <a href="{% url 'sellers_prd' %}" style="margin-left: 10px;text-decoration: none;color: black;">Products :</a>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row" style="width: 100%;margin-bottom: 2vh;">
+        {% for d in products %}
+        <div class="col-md-6 col-12" style="margin-top: 2vh;">
+            <div class="card" style="border-radius: 3vh;border-color: rgb(255, 136, 0);">
+                <div class="card-body" style="margin-top: 2vh;margin-bottom: 2vh;">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4>{{d.prd_name}}</h4>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary" onclick="change('{{ d.product_code }}')"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg></button>
+                        </div>
+                    </div>
+                    <div id="change-name-{{ d.product_code }}" style="margin-top: 2vh;display: none;">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <img src="{{d.prd_img.url}}" alt="" style="height: 35vh;width: 80%;">
+                            </div>
+                            <div class="col-md-5 col-12">
+                                <h4>Description :</h4>
+                                <p style="height: 20vh;overflow: auto;">{{d.prd_desc}}</p>
+                                <h6>Rate :<span>{{d.prd_rate}}</span></h6>
+                                <h6>Quantity :<span>{{d.prd_quantity}}</span></h6>
+                                <a href="">Update Product</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    function change(productcode) {
+        var show = document.getElementById('change-name-' + productcode);
+        if (show.style.display === "none") {
+            show.style.display = "block";
+        } else {
+            show.style.display = "none";
+        }
+    }
+</script>
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends "common2.html" %}
+{% load static %}
+{% block title %}Sellers : Products{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 20px;width: 100%;">
+        <div class="col-12" style="margin-left: 10px;">
+            <a href="{% url 'sellers_home' %}" style="text-decoration: none;">Home / </a>
+            <a href="{% url 'sellers_prd' %}" style="margin-left: 10px;text-decoration: none;color: black;">Orders :</a>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row" style="width: 100%;margin-bottom: 2vh;">
+        {% for j in order %}
+        <div class="col-md-6 col-12" style="margin-top: 2vh;">
+            <div class="card" style="border-radius: 3vh;border-color: rgb(255, 136, 0);">
+                <div class="card-body" style="margin-top: 2vh;margin-bottom: 2vh;">
+                    <div class="row">
+                        <div class="col-10">
+                            <h4>Order Id : <span style="color: rgb(255, 136, 0) ;">{{j.trackingid}}</span></h4>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary" onclick="change('{{ j.trackingid }}')"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg></button>
+                        </div>
+                    </div>
+                    <div id="change-name-{{ j.trackingid }}" style="margin-top: 3vh;display: none;">
+                        {% for k in company %}
+                        {% if j.product.seller_company == k.company_name %}
+                        <div class="row">
+                            <div class="col-8">
+                                <h5>Ordered By : </h5>
+                            </div>
+                            <div class="col-4">
+                                <h5><b>{{j.user}}</b></h5>
+                            </div>
+                        </div>
+                        <div class="row text-center bg-success text-light">
+                            <div class="col col-head">Address</div>
+                            <div class="col col-head">Product</div>
+                            <div class="col col-head">Products Ordered</div>
+                            <div class="col col-head">Total Rate</div>
+                        </div>
+                        <div class="row" style="margin-top: 1vh;">
+                            <div class="col col-head">
+                                {{j.address.user_name}},<br>{{j.address}},<br>{{j.address.user_pincode}},{{j.address.user_state}},<br>{{j.address.user_city}}
+                            </div>
+                            <div class="col col-head"><b>{{j.product.prd_name}}</b></div>
+                            <div class="col col-head">{{j.prd_qty}}</div>
+                            <div class="col col-head">{{j.rate}}</div>
+                        </div>
+                        <div class="row" style="margin-top: 2vh;">
+                            <div class="col-9">
+                                <h6>Ordered On : </h6>
+                            </div>
+                            <div class="col-3">
+                                <h6>{{j.createdat}}</h6>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    function change(trackingid) {
+        var show = document.getElementById('change-name-' + trackingid);
+        if (show.style.display === "none") {
+            show.style.display = "block";
+        } else {
+            show.style.display = "none";
+        }
+    }
+</script>
+{% endblock content %}

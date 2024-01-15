@@ -3,67 +3,54 @@
 {% block title %}ShoppyField : Orders{% endblock title %}
 {% block content %}
 <div class="container">
-    <div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="row" style="margin-top: 8em;width: 100%;">
         <div class="col-lg-1"></div>
         <div class="col-lg-11 col-12">
             <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-            <a href="{% url 'orders' %}" style="margin-left: 10px;text-decoration: none;color: black;">Orders :</a>
+            <a href="{% url 'orders' %}" style="text-decoration: none;color: #6c757d;">Orders :</a>
         </div>
     </div>
     {% if orders %}
     <div class="row" style="width: 100%;">
         <div class="col-lg-1"></div>
-        <div class="col-lg-10 col-12">
+        <div class="col-lg-10 col-12 mt-1">
             {% for c in orders %}
-            <div class="container"
-                style="border: solid rgb(111, 111, 200);border-radius: 10px;margin-top: 10px;background-color: rgb(111, 111, 200);">
-                <div class="row" style="margin-top: 20px;margin-left: 20px;">
-                    <div class="col-12">
-                        <h3 style="color: white;">{{c.trackingid}}</h3>
-                    </div>
+            <div class="orders">
+                <div class="tr_id">
+                    <h3>{{c.trackingid}}</h3>
                 </div>
-                <hr style="color: white;">
-                <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
-                    <div class="col-lg-2 col-11">
-                        <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
-                            style="height: 180px;width: 100%;border-radius: 10px;margin-left: 10px;">
+                <div id="tr_dtl">
+                    <hr style="color: white;">
+                    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="col-lg-2 col-12 mt-3">
+                            <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
+                                style="height: 12em;width: 100%;border-radius: 0.3em;margin-left: 10px;">
+                        </div>
+                        <div class="col-lg-5 col-5 mt-3" style="margin-left: 0.2em;">
+                            {% if order_frt.category_code == c.product.category_code %}
+                            <a href="" style="text-decoration: none;color: #fefae0;">
+                                <h2>{{c.product}}</h2>
+                            </a>
+                            {% endif %}
+                        </div>
+                        <div class="col-lg-4 col-6 mt-2">
+                            <h5 style="color: #fefae0;">Seller : <span
+                                    style="color: #fefae0;">{{order_frt.product.seller_company}}</span>
+                            </h5>
+                            <h5 style="color: #fefae0;">Rate : <span style="color: #fefae0;">₹{{c.prd_rate}}</span>
+                            </h5>
+                            <h5 style="color: #fefae0;">Quantity : <span style="color: #fefae0;">{{c.prd_qty}}</span>
+                            </h5>
+                        </div>
                     </div>
-                    <div class="col-lg-6 col-12">
-
-                        {% for d in cat %}
-                        {% if d.category_code == c.product.category_code %}
-                        <a href="{% url 'pdtdtls' d.category_code c.product.product_code %}"
-                            style="text-decoration: none;">
-                            <h2 style="color: white;">{{c.product}}</h2>
-                        </a>
-                        {% endif %}
-                        {% endfor %}
-
-                    </div>
-                    <div class="col-lg-2 col-12">
-
-                        <h5>Seller : <span style="color: rgb(246, 246, 246);">{{c.product.seller_company}}</span>
-                        </h5>
-                        <h5>Rate : <span style="color: rgb(246, 246, 246);">₹ {{c.prd_rate}}</span></h5>
-                        <h5>Quantity : <span style="color: rgb(246, 246, 246);">{{c.prd_qty}}</span></h5>
-
-                    </div>
-                </div>
-                <hr style="color: white;">
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-lg-8 col-12" style="margin-top: 7px;">
-                        <h6>Ordered on : <span style="color: rgb(246, 246, 246);">{{c.createdat}}</span></h6>
-                    </div>
-                    <div class="col-lg-4 col-12" style="margin-top: 5px;">
-                        <h5>Order Rate : <span style="color: rgb(246, 246, 246);">₹ {{c.rate}}</span></h5>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 20px;margin-top: 5px;">
-                    <div class="col-lg-5 col-2"></div>
-                    <div class="col-lg-4 col-10">
-                        <a class="btn btn-primary" href="{% url 'delorder' c.trackingid%}">
-                            Cancel order
-                        </a>
+                    <hr style="color: white;">
+                    <div class="row">
+                        <div class="col-12" style="margin: 10px 0 15px 12px;">
+                            <h6 style="color: #fefae0;">Ordered on : <span
+                                    style="color: #fefae0;">{{c.createdat}}</span></h6>
+                            <h6 style="color: #fefae0;">Order Rate : <span style="color: #fefae0;">₹
+                                    {{c.prd_rate}}</span></h6>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,14 +59,13 @@
     </div>
     {% else %}
     <div class="row" style="margin-top: 30px;width: 100%;margin-bottom: 50px;">
-        <div class="col-lg-5"></div>
-        <div class="col-lg-2">
-            <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;">
+        <div class="col-lg-4 col-1"></div>
+        <div class="col-lg-4 col-11">
+            <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;mix-blend-mode: multiply;">
             <h5
                 style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
                 Your cart is empty!</h5>
         </div>
-        <div class="col-lg-5"></div>
     </div>
 </div>
 {% endif %}

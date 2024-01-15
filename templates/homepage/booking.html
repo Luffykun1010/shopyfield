@@ -3,84 +3,70 @@
 {% block title %}ShoppyField : Booking{% endblock title %}
 {% block content %}
 <div class="container">
-    <div class="row" style="margin-top: 20px;width: 100%;">
+    <div class="row" style="margin-top: 7em;width: 100%;">
+        <div class="col-lg-1"></div>
         <div class="col-lg-11 col-sm-12">
-            <a href="{% url 'home' %}" style="text-decoration: none;">Home / </a>
-            <a href="{% url 'booking' %}" style="margin-left: 10px;text-decoration: none;color: black;">Booking :</a>
+            <a href="{% url 'home' %}" style="text-decoration: none;">Home /</a>
+            <a href="{% url 'booking' %}" style="text-decoration: none;color: #6c757d;">Booking :</a>
         </div>
     </div>
     {% if booking %}
-    <div class="row" style="margin-top: 30px;width: 100%;margin-bottom: 50px;">
-        <div class="col-lg-5 col-1"></div>
-        <div class="col-lg-2 col-10">
-            <img src="{% static '/images/cartimg.webp' %}" style="width: 100%;height: 200px;">
-            <h5
-                style="text-align: center;margin-top: 25px;opacity: 60%;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-                Your booking is empty!</h5>
-        </div>
-        <div class="col-lg-5"></div>
-    </div>
     {% else %}
     <div class="row" style="width: 100%;">
+        <div class="col-md-1"></div>
         {% if address %}
-        <div class="col-lg-6 col-12" style="margin-top: 20px;">
-            <div class="container" style="border-style: double;border-color: rgb(111, 111, 200);border-radius: 9px;">
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-lg-8 col-12">
-                        <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
-                            Delivery Details :</h2>
+        <div class="col-md-5 col-12">
+            <div class="container" id="delvery_add">
+                <div class="row">
+                    <div class="col-lg-8 col-12 mt-3">
+                        <h2 class="del_h2">Delivery Details :</h2>
                     </div>
                     <div class="col-lg-4 col-12">
-                        <form action="change-address">
-                            <button type="submit"
-                                style="border: none;font-weight: 500; background-color: rgb(243, 113, 113);height: 50px;width: 100%;margin-bottom: 25px;font-size: small;height: 40px;">Change
+                        <form action="change-address" method="POST">
+                            {% csrf_token %}
+                            <button class="ch_btn" type="submit">Change
                                 Address</button>
                         </form>
                     </div>
                 </div>
-                <div class="row" style="margin-top: -15px;">
-                    <div class="col-lg-12" style="margin-top: -8px;">
-                        <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <hr style="color: rgb(0, 0, 0);">
                     </div>
                 </div>
                 <div class="row">
                     {% for d in address %}
-                    <div class="col-lg-12 col-12" style="margin-top: 5px;margin-bottom: 20px;">
+                    <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-6 col-4">
-                                <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
-                                    Name:</h5>
+                            <div class="col-lg-6 col-6">
+                                <h4 class="add_dtl">Name :</h4>
                             </div>
-                            <div class="col-lg-6 col-8">
-                                <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
-                                    {{d.user_name}}</h5>
+                            <div class="col-lg-6 col-6">
+                                <h4 class="add_dtl">{{d.user_name}}</h4>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 8px;">
-                            <div class="col-lg-6 col-4">
-                                <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
-                                    Address:</h5>
+                        <div class="row">
+                            <div class="col-lg-6 col-6">
+                                <h4 class="add_dtl">Address:</h4>
                             </div>
-                            <div class="col-lg-6 col-8">
-                                <h5 style="color: rgb(102, 102, 222);font-family: 'Times New Roman';font-weight: 500;">
-                                    {{d.user_housename}} , <br> {{d.user_state}} ,<br>
-                                    {{d.user_pincode}}</h5>
+                            <div class="col-lg-6 col-6 mb-3">
+                                <h4 class="add_dtl">{{d.user_housename}} ,<br>
+                                    {{d.user_pincode}}</h4>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            <div class="container"
-                style="border-style: double; border-color: rgb(111, 111, 200);border-radius: 9px;margin-top: 20px;">
+            <div class="container" id="delvery_add">
                 <div class="row">
-                    <div class="col-12" style="margin-top: 15px;">
-                        <h2 style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700">
+                    <div class="col-12 mt-3">
+                        <h2 class="del_h2">
                             Payment Details :</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12" style="margin-top: -8px;">
+                    <div class="col-12">
                         <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
                     </div>
                 </div>
@@ -88,42 +74,18 @@
                 {% for d in payment %}
                 <div class="row">
                     <div class="col-12" style=" margin-bottom: 15px;">
-                        <h4> You have selected {{d.payment_method}} as your payment method.</h4>
+                        <h4 class="pymnt_conf"> You have selected {{d.payment_method}} as your payment method.</h4>
                         <div class="row" style="width: 100%;margin-top: 20px;">
-                            <div class="col-6 ">
+                            <div class="col-6 d-none">
                                 {% if d.payment_method == 'Cash on Delivery' %}
-                                <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                    style="border: none;font-weight: 500; background-color: rgb(238, 149, 16);height: 60px;width: 100%;margin-bottom: 10px;">Continue
+                                <button type="submit">Continue
                                     Shopping</button>
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content bg-dark">
-                                            <div class="modal-body">
-                                                <p style="color: white;"> Order successfully confirmed.
-                                                </p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="home" method="POST">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="btn btn-success">Home</button>
-                                                </form>
-                                                <form action="orders" method="POST">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="btn-primary"
-                                                        style="height: 40px;border-color: white;border-style: none;color: white;border-radius: 4px;">Orders</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             {% endif %}
                             {% if d.payment_method == 'Online Payment' %}
                             <h6 style="margin-top: 30px;">Online payment is currently unavailable.</h6>
                             {% endif %}
-                            <div class="col-6">
+                            <div class="col-6 d-none">
                                 <form action="change-payment" method="POST">
                                     {% csrf_token %}
                                     <button type="submit"
@@ -137,23 +99,15 @@
                 {% endfor %}
                 {% else %}
                 <div class="row">
-                    <div class="col-12" style="margin-top: 5px;margin-bottom: 15px;">
-                        <form action="payment" method="POST">
+                    <div class="col-12">
+                        <form action="payment" method="POST" id="pymnt">
                             {% csrf_token %}
                             <input type="radio" id="cod" name="payment" value="Cash on Delivery">
                             <label for="cod" style=>Cash On Delivery</label>
-                            <br>
-                            <div>
-                                <input type="radio" id="op" name="payment" value="Online Payment">
-                                <label for="op">Online Payment</label>
-                            </div>
-                            <div class="row" style="margin-top: 30px;">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8">
-                                    <button type="submit"
-                                        style="border: none;font-weight: 500; background-color: rgb(238, 149, 16); height: 50px;width: 100%;margin-bottom: 15px;">Continue
-                                        Payment</button>
-                                </div>
+                            <p>We only support COD for now. Select to continue.</p>
+                            <div class="pymt_btn">
+                                <button type="submit">Continue
+                                    Payment</button>
                             </div>
                         </form>
                     </div>
@@ -162,100 +116,85 @@
             </div>
         </div>
         {% else %}
-        <div class="col-lg-4 col-12">
-            <div class="container" style="background-color: rgb(205, 244, 77);border-radius: 9px;margin-top: 15px">
+        <div class="col-md-5 col-12"
+            style="border: 2px #6c757d solid;border-radius: 0.8em;margin-top: 1em;font-family: 'Times New Roman', Times, serif;" id="add_top">
+            <div class="container" id="address">
                 <div class="row" style="width: 100%;">
-                    <div class="col-12">
-                        <h2
-                            style="color: rgb(0, 0, 0);font-family: 'Times New Roman', Times, serif;font-weight: 700;margin-top: 15px">
-                            Delivery Details :</h2>
+                    <div class="col-12 mt-3">
+                        <h2 class="add_head">Delivery Details :</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12" style="margin-top: -8px;">
-                        <hr style="color: rgb(0, 0, 0);margin-top: 8px;">
+                        <hr style="color: rgb(0, 0, 0);">
                     </div>
                 </div>
-                <form action="address" method="POST" style="font-family:  Verdana, Geneva, Tahoma, sans-serif;">
+                <form action="address" method="POST">
                     {% csrf_token %}
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-3">
-                            <label for="usersname" style="font-weight: 500; ">Name:</label>
+                            <label for="usersname">Name:</label>
                         </div>
-                        
                         <div class="col-9">
-                            <input type="text"
-                                style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                id="usersname" name="usersname" placeholder="Enter your name" required>
+                            <input type="text" id="usersname" name="usersname" placeholder="Enter your name" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-3">
-                            <label for="usersphone" style="font-weight: 500; ">Phone Number:</label>
+                            <label for="usersphone">Phone Number:</label>
                         </div>
-                        
+
                         <div class="col-9">
-                            <input type="tel"
-                                style="width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                id="usersphone" name="usersphone" placeholder="Enter your phone number"
+                            <input type="tel" id="usersphone" name="usersphone" placeholder="Enter your phone number"
                                 value="{{user.get_username}}" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-3">
-                            <label for="usershouse" style="font-weight: 500; ">House no/ Building Name:</label>
+                            <label for="usershouse">House no/ Building Name:</label>
                         </div>
-                        
+
                         <div class="col-9">
-                            <input type="text"
-                                style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                id="usershouse" name="usershouse" placeholder="Enter your House no/Building Name"
+                            <input type="text" id="usershouse" name="usershouse" placeholder="Enter your House no"
                                 required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-3">
-                            <label for="usersarea" style="font-weight: 500; ">Road Name / Area / Colony:</label>
+                            <label for="usersarea">Road Name / Area / Colony:</label>
                         </div>
-                        
+
                         <div class="col-9">
-                            <input type="text"
-                                style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                id="usersarea" name="usersarea" placeholder="Enter your Road Name/Area/Colony" required>
+                            <input type="text" id="usersarea" name="usersarea" placeholder="Enter your Area" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-3">
-                            <label for="userspincode" style="font-weight: 500; ">Pincode:</label>
+                            <label for="userspincode">Pincode:</label>
                         </div>
-                        
+
                         <div class="col-9">
-                            <input type="text"
-                                style="width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                id="userspincode" name="userspincode" placeholder="Enter your pincode" required>
+                            <input type="text" id="userspincode" name="userspincode" placeholder="Enter your pincode"
+                                required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-3">
-                            <label for="userscity" style="font-weight: 500; ">City:</label>
+                            <label for="userscity">City:</label>
                         </div>
-                       
+
                         <div class="col-9">
-                            <input type="text"
-                                style="text-transform: capitalize;width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                id="userscity" name="userscity" placeholder="Enter your city" required>
+                            <input type="text" id="userscity" name="userscity" placeholder="Enter your city" required>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 15px;">
                         <div class="col-3">
-                            <label for="usersstate" style="font-weight: 500; ">State:</label>
+                            <label for="usersstate">State:</label>
                         </div>
-                        
+
                         <div class="col-9">
                             <div class="btn-group dropup" style="width: 100%;">
-                                <select type="text"
-                                    style="width: 100%;border: none;outline: none;background-color: rgb(205, 244, 77);border-bottom: 1px solid rgb(0, 0, 255);margin-left: 10px;"
-                                    id="usersstate" name="usersstate" required>
+                                <select type="text" id="usersstate" name="usersstate" required>
                                     <option value="">Select your state</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -291,122 +230,96 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 30px;">
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-4">
-                            <button type="submit"
-                                style="font-weight: 500; background-color: rgb(16, 238, 190);border-color: rgb(112, 112, 221);height: 50px;width: 100%;margin-bottom: 25px;">Save</button>
-                        </div>
-                        <div class="col-lg-4"></div>
+                    <div class="save_btn">
+                        <button type="submit">Save</button>
                     </div>
                 </form>
             </div>
         </div>
         {% endif %}
-        <div class="col-lg-5" style="margin-top: 20px;">
-            <div class="container" style="background-color: rgb(74, 169, 174);border-radius: 9px;">
+        <div class="col-md-5">
+            <div class="container" id="total_prd">
                 <div class="row">
-                    <div class="col-12" style="margin-top: 15px;">
-                        <h2 style="color: white;font-family: 'Times New Roman', Times, serif;font-weight: 700">Order
+                    <div class="col-12 mt-3">
+                        <h2 class="ttl_head">Order
                             Details :
                         </h2>
                     </div>
                 </div>
-                <hr style="color: rgb(255, 255, 255);margin-top: 8px;">
-                <div class="row" style="margin-top: -10px;width: 100%;">
-                    <div class="col-12">
-                        {% if cart %}
-                        {% for c in cart %}
-                        <div class="row" style="margin-top: 10px;margin-bottom: 20px;">
-                            <div class="col-5 col-lg-4">
-                                <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
-                                    style="border-radius: 8px;">
-                            </div>
-                            <div class="col-7 col-lg-8">
-                                <h5 style="color: rgb(153, 253, 4);">{{c.product.prd_name}}</h5>
-                                <div class="row" style="margin-top: 15px;">
-                                    <div class="col-9">
-                                        <h5 style="color:  rgb(255, 255, 255);"> ₹ {{c.product.prd_rate}}</h5>
-                                        <h5 style="color:  rgb(255, 255, 255);font-size: smaller;">Quantity:
-                                            {{c.order_qty}}</h5>
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="button"
-                                            style="background-color: rgb(255, 0, 0);height: 40px;color: white;"
-                                            class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                            </svg>
-                                        </button>
-                                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static"
-                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content bg-dark">
-                                                    <div class="modal-body">
-                                                        <p style="color: white;">Are you sure you want to remove the
-                                                            item
-                                                            <b>
-                                                                "{{c.product.prd_name}}" </b> from cart? <br><br>The
-                                                            following
-                                                            related
-                                                            items will be
-                                                            deleted: <br> Item :
-                                                            <b><i>{{c.product.prd_name}}</i></b><br>
-                                                            Quantity : <b><i>{{c.order_qty}}</i></b>
-                                                        </p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <form action="delcart" method="POST">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" style="color: rgb(0, 0, 0);"
-                                                                class="prd_id" name="prd_id" value="{{c.product_id}}">
-                                                            <input type="hidden" name="order_qty" class="order_qty"
-                                                                value="{{c.order_qty}}">
-                                                            <button type="submit" class="btn-primary"
-                                                                style="height: 40px;border-color: white;border-style: none;color: white;border-radius: 4px;">Remove</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {% else %}
-                        <div class="col-12">
-                            <h2>No Items To Order</h2>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <hr style="color: rgb(255, 255, 255);margin-top: 2px;">
+                <hr style="color: rgb(255, 255, 255);">
                 <div class="row">
-                    <div class="col-lg-8 col-6"
-                        style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
-                        <h4 style="font-family: 'Times New Roman', Times, serif;font-weight: 700;">Price
-                            ({{totalquantity}}) :
+                    <div class="col-lg-8 col-6">
+                        <h4 class="ttl_h4">Price :
                         </h4>
                     </div>
-                    <div class="col-lg-4 col-6"
-                        style="color: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 20px;">
-                        <h4 style="font-family: 'Times New Roman', Times, serif;font-weight: 700">₹ {{totalrate}}</h4>
+                    <div class="col-lg-4 col-6">
+                        <h4 class="ttl_h4">₹ {{booking_rate}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-6">
+                        <h4 class="ttl_h4">Quantity:
+                        </h4>
+                    </div>
+                    <div class="col-lg-4 col-6">
+                        <h4 class="ttl_h4">{{booking_quantity}}&nbsp;{% if booking_quantity == 1 %}item {% else %}
+                            items{% endif %}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-6">
+                        <h4 class="ttl_h4">Delivery Charge :
+                        </h4>
+                    </div>
+                    <div class="col-lg-4 col-6">
+                        <h4 class="ttl_h4">₹ {{delivery_charge}}</h4>
+                    </div>
+                </div>
+                <hr style="color: rgb(255, 255, 255);">
+                <div class="row">
+                    <div class="col-lg-8 col-6 mb-4">
+                        <h4 class="ttl_h4">Total Amount:
+                        </h4>
+                    </div>
+                    <div class="col-lg-4 col-6">
+                        <h4 class="ttl_h4">₹{{totalrate}}</h4>
                     </div>
                 </div>
             </div>
             <div class="col-12">
-                <p style="opacity: 70%;font-size: small;color: rgb(132, 132, 205) ;margin-top: 15px;">Safe and Secure
+                <p style="opacity: 70%;font-size: small;color: #6c757d;margin: 0.2em 0 0 0.3em;">Safe and Secure
                     Payments. Easy
                     returns. 100% authentic products.</p>
             </div>
         </div>
     </div>
     {% endif %}
+</div>
+<div class="last_btn">
+    <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn_last">Continue
+        Shopping</button>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-body">
+                    <p style="color: white;"> Order successfully confirmed.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <form action="home" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Home</button>
+                    </form>
+                    <form action="orders" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-primary"
+                            style="height: 40px;border-color: white;border-style: none;color: white;border-radius: 4px;">Orders</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

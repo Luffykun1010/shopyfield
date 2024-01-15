@@ -1,25 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-class Categories(models.Model):
+class Main_Categories(models.Model):
     cat_name=models.CharField(max_length=200)
     cat_img=models.ImageField(upload_to='Categories')
     category_code=models.CharField(max_length=200)
-    # created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.cat_name
+        return self.category_code
+class Categories(models.Model):
+    main_category=models.ForeignKey(Main_Categories,on_delete=models.CASCADE)
+    sub_cat_name=models.CharField(max_length=200)
+    sub_category_code=models.CharField(max_length=200)
+    def __str__(self):
+        return self.sub_category_code
 
 class Products(models.Model):
-    category_code=models.CharField(max_length=200)
+    cat_name=models.ForeignKey(Categories,on_delete=models.CASCADE)
     prd_name=models.CharField(max_length=200)
     prd_img=models.ImageField(upload_to='Categories')
+    prd_size=models.CharField(max_length=200)
     prd_rate=models.IntegerField()
     prd_quantity=models.IntegerField()
     prd_desc=models.CharField(max_length=500)
     seller_company=models.CharField(max_length=200)
-    cat_name=models.ForeignKey(Categories,on_delete=models.CASCADE)
     product_code=models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
+    total_sale=models.IntegerField()
     def __str__(self):
         return self.prd_name
     class Meta:
