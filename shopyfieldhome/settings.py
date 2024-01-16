@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d=($(hwu!tng4&8+&&xrc&)b-y=sxfypfo(0vr-fd3+=c4f%&x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 LOGOUT_REDIRECT_URL = '/'
 
@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shopyfield_home',
-    'sellers_app'
 ]
 
 MIDDLEWARE = [

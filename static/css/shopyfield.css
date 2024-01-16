@@ -639,3 +639,26 @@
 .logged a{
     text-decoration: none;
 }
+.offcanvas-body details[open] {
+    height: 9.5em;
+}
+.offcanvas-body details summary{
+    list-style: none;
+    text-transform: uppercase;
+    font-size: 14pt;
+    display: flex;
+    justify-content: space-between;
+}
+.offcanvas-body details summary p,svg{
+    height: 1.5em;
+    margin-top: -0.6em;
+}
+.offcanvas-body details a{
+    text-decoration: none;
+    color: #2b2d42;
+    margin: 0 0 1em 1.7em;
+    font-size: 13pt;
+}
+.offcanvas-body details a svg{
+    margin-top: 0em;
+}

@@ -1,0 +1,11 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block title %}ShoppyField : 404{% endblock title %}
+{% block content %}
+<div style="margin-top: 7em;color: #6c757d;text-align: center;margin-bottom: 4em;">
+        <h1 style="font-size: 45pt;">404</h1>
+        <h1 style="font-size: 30pt;margin-top: 0.5em;margin-bottom: 1.2em;">Page not found</h1>
+        <a href="{% url 'home' %}" style="text-transform: uppercase;text-decoration: none;color: #6c757d;border: 1.5px solid #6c757d;padding: 0.7em;border-radius: 0.4em;">Return to Home</a>
+    </div>
+</div>
+{% endblock content %}

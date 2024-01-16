@@ -1,0 +1,664 @@
+@font-face {
+    font-family: 'Mina';
+    src: url('Mina-Regular.eot');
+    src: url('Mina-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Mina-Regular.woff2') format('woff2'),
+        url('Mina-Regular.woff') format('woff'),
+        url('Mina-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.body {
+    margin: 0;
+    width: 100%;
+    background-color: #FEFAE0;
+}
+
+.row {
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    #imgnike,
+    #mn-head,
+    #vldiv,
+    .vl,
+    .prd_dtl,
+    #container1 {
+        display: none;
+    }
+    #delvery_add,#total_prd,#add_top{
+        margin-left: 0.6em;
+    }
+    .prds,#cates{
+        margin-left: 0.8em;
+    }
+    #mob-head{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: #FEFAE0;
+        height: 5.5em;
+        color: #6c757d;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1023px) {
+    #cates a {
+        margin-left: 0.5em;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    #vldiv {
+        display: flex;
+        justify-content: center;
+    }
+
+    #container,
+    .mob_prd_dtl,#mob-head {
+        display: none;
+    }
+}
+.off-img {
+    width: 100%;
+    height: 75vh;
+    margin-top: 5.5em;
+}
+
+.head-name {
+    font-family: "Mina";
+    text-decoration: none;
+    font-size: 18pt;
+    color: #6c757d;
+}
+
+#mn-head {
+    background: #FEFAE0;
+    height: 5.5em;
+    color: #6c757d;
+}
+
+.modal-content {
+    background: #FEFAE0;
+    mix-blend-mode: multiply;
+}
+
+.search-input {
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px #8d99ae solid;
+    width: 90%;
+    color: #252422;
+    font-family: "Mina";
+}
+
+.search-inputt::placeholder {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    color: #6c757d;
+}
+
+#cats {
+    font-size: 11pt;
+}
+
+#cats:hover {
+    font-size: 11pt;
+    color: #2a9d8f;
+}
+
+#cats:after {
+    display: block;
+    content: '';
+    border-bottom: 1px #2a9d8f solid;
+    transform: scaleX(0);
+    transition: transform 300ms ease-in-out;
+}
+
+#cats:hover:after {
+    transform: scaleX(1);
+}
+
+#cats:after {
+    transform-origin: 0% 50%;
+}
+
+#m-heads {
+    height: 3em;
+}
+
+.heads {
+    color: #ced4da;
+    font-size: 18pt;
+    cursor: pointer;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.heads.active {
+    color: #6c757d;
+}
+
+.vl {
+    border-left: 2px solid #ced4da;
+    height: 30px;
+}
+
+.prds {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.prds .com {
+    font-size: 9pt;
+    opacity: 0.7;
+    color: #252422;
+}
+
+.prds h5 {
+    font-size: 15pt;
+    margin-top: -0.5em;
+    opacity: 0.8;
+    color: #252422;
+}
+
+.prds .rate {
+    font-size: 11pt;
+    color: #382218;
+    margin-top: -1em;
+    font-weight: 700;
+}
+
+.prds button {
+    background: #252422;
+    width: 100%;
+    height: 2.5em;
+    border: none;
+    color: #ced4da;
+    font-size: 12pt;
+    margin-top: -1em;
+}
+
+.prds button:hover {
+    background: #343a40;
+    color: #FEFAE0;
+}
+
+.view-all {
+    width: 100%;
+    height: 3.5em;
+    border: 2px #252422 solid;
+    background-color: transparent;
+    color: #252422;
+}
+
+.cats .com {
+    font-size: 9pt;
+    opacity: 0.7;
+    color: #252422;
+}
+
+.cats h5 {
+    font-size: 15pt;
+    margin-top: -0.5em;
+    opacity: 0.8;
+    color: #252422;
+}
+
+.cats .rate {
+    font-size: 11pt;
+    color: #382218;
+    margin-top: -1em;
+    font-weight: 700;
+}
+
+.cats button {
+    background: #252422;
+    width: 100%;
+    height: 2.5em;
+    border: none;
+    color: #ced4da;
+    font-size: 12pt;
+    margin-top: -1em;
+}
+
+.cats button:hover {
+    background: #343a40;
+    color: #FEFAE0;
+}
+
+.sign-in {
+    background: #ced4da;
+}
+
+.sign-in button {
+    width: 100%;
+    height: 2.5em;
+    background-color: #252422;
+    color: #ced4da;
+    border: none;
+    border-radius: 0.5em;
+    margin: 1.5em 0;
+}
+
+.sign-in button:hover {
+    background: transparent;
+    border: #252422 2px solid;
+    color: #252422;
+}
+
+.sign-in p {
+    margin-top: -1.5em;
+    text-align: center;
+    font-size: 10pt;
+    color: #252422;
+}
+
+.sign-in a {
+    text-decoration: none;
+    color: #2a9d8f;
+}
+
+.sign-in a:hover {
+    color: #ef233c;
+}
+
+.top {
+    background: #8d99ae;
+    text-align: center;
+    font-size: 11pt;
+}
+
+.top:hover {
+    background: #a5b0c5;
+}
+
+.top a {
+    text-decoration: none;
+    color: #FEFAE0;
+}
+
+.foot {
+    background: #2b2d42;
+}
+
+.foot p {
+    color: #ddb892;
+    font-size: 17pt;
+    font-family: "Mina";
+}
+
+.foot-div a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #fdf0d5;
+    opacity: 0.8;
+    font-size: 12pt;
+    padding: 0.3em 0 0 0;
+}
+
+.foot-div a:hover {
+    color: #e9edc9;
+}
+
+.foooter {
+    background: #171717;
+}
+
+.foooter a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #43aa8b;
+}
+
+.foooter a:hover {
+    color: #f94144;
+}
+
+.categories {
+    margin: 1em 0 2em 0;
+    color: #6c757d;
+}
+
+#cates a {
+    text-decoration: none;
+    color: #6c757d;
+}
+
+#cates a:hover {
+    color: #382218;
+    opacity: 0.9;
+}
+
+#cates:hover,
+.prds:hover,
+.cats:hover {
+    transform: scale(1.03);
+}
+
+#prd_dtl,
+#mob_prd_dtl {
+    color: #2b2d42;
+    font-family: monospace;
+}
+
+#prd_dtl h2,
+#mob_prd_dtl h2 {
+    margin-top: 1em;
+    font-weight: 600;
+}
+
+#prd_dtl .comp,
+#mob_prd_dtl .mob_comp {
+    opacity: 0.8;
+    font-size: 8pt;
+    margin-top: -0.8em;
+}
+
+#prd_dtl h3,
+#mob_prd_dtl h3 {
+    margin-top: -0.2em;
+    font-size: 18pt;
+    font-weight: 550;
+}
+
+#prd_desc,
+#mob_prd_desc {
+    width: 85%;
+}
+
+#prd_desc summary {
+    list-style: none;
+    margin: 1.5em 0 1em 0;
+    font-size: 20pt;
+    font-weight: 600;
+}
+
+#mob_prd_desc summary {
+    list-style: none;
+    font-size: 15pt;
+    font-weight: 600;
+}
+
+#prd_desc p {
+    margin: 1.5em 0;
+    font-size: 15pt;
+    letter-spacing: 0.1em;
+}
+
+#mob_prd_desc p {
+    font-size: 12pt;
+    letter-spacing: 0.1em;
+}
+
+#cart_prd,
+#cart_tot {
+    background: #6c757d;
+    margin-top: 4vh;
+    height: fit-content;
+    border-radius: 0.5em;
+    color: #e9edc9;
+}
+
+#cart_tot p {
+    margin-top: -0.5em;
+}
+#cart_tot button {
+    background-color: rgb(255, 136, 0);
+    color: #e9edc9;
+    border-radius: 0.5em;
+    border: none;
+    width: 100%;
+    height: 3em;    
+    font-weight: 600;
+}
+#address label{
+    font-weight: 550;
+    color: #343a40;
+}
+#address .add_head{
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 25pt;
+    margin-bottom: 0.3em;
+}
+#address input,select{
+    text-transform: capitalize;
+    width: 100%;
+    border: none;
+    font-weight: 550;
+    outline: none;
+    color: #343a40;
+    border-bottom: 1px solid #6c757d;
+    background: transparent;
+    margin-left: 10px;
+}
+.save_btn{
+    display: flex;
+    justify-content: center;
+}
+.save_btn button{
+    background: #6c757d;
+    border: none;
+    color: #FEFAE0;
+    height: 2.8em;
+    width: 5em;
+    margin: 1.5em 0;
+    border-radius: 0.5em;
+}
+.save_btn button:hover{
+    border:2px solid #6c757d;
+    background: transparent;
+    color: #6c757d;
+}
+#total_prd{
+    background: #6c757d;
+    border-radius: 0.8em;
+    margin-top: 1em;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+}
+#total_prd .ttl_head{
+    color: #ced4da;
+    font-weight: 600;
+    font-size: 22pt;
+    margin: 0.2em 0;
+}
+#total_prd .ttl_h4{
+    margin: 0.2em 0;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13pt;
+    font-weight: 550;
+    color: #ced4da;
+}
+#delvery_add{
+    border: 2px #6c757d solid;
+    border-radius: 0.8em;
+    margin-top: 1em;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+}
+.del_h2{
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 22pt;
+    margin-bottom: 0.3em;
+}
+.ch_btn{
+    font-size: 10pt;
+    margin-top: 1.2em;
+    background: transparent;
+    border: 2px #6c757d solid;
+    height: 3em;
+    width: 100%;
+    border-radius: 0.5em;
+    color: #6c757d;
+}
+.ch_btn:hover{
+    background: #6c757d;
+    border: none;
+    color: #e9edc9;
+}
+.add_dtl{
+    font-weight: 550;
+    color: #6c757d;
+    font-size: 13pt;
+    margin-bottom: 0.3em;
+}
+#pymnt label{
+    font-weight: 550;
+    color: #6c757d;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12pt;
+}
+#pymnt p{
+    font-size: 10pt;
+    color: #6c757d;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+}
+.pymt_btn{
+    display: flex;
+    justify-content: center;
+}
+#pymnt button{
+    border: none;
+    font-weight: 500; 
+    background:#2a9d8f;
+    border-radius: 0.5em;
+    color: #e9edc9; 
+    height: 3.5em;
+    width: 15em;
+    margin-bottom: 15px;
+}
+.pymnt_conf{
+    color: #6c757d;
+    font-size: 14pt;
+}
+.last_btn{
+    margin-top: 2.5em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn_last{
+    color: #ced4da;
+    background: #6c757d;
+    height: 3.5em;
+    width: 15em;
+    border-radius: 0.5em;
+    border: none;
+}
+.orders{
+    background: #6c757d;
+    border-radius: 1em;
+    margin: 1.5em 0;
+}
+.tr_id{
+    display: flex;
+    justify-content: space-between;
+}
+.tr_id h3{
+    margin: 0.5em 0 0 0;
+    color: #FEFAE0;
+    padding: 0.6em;
+    cursor: pointer;
+}
+#s-inp input{
+    border: 2px #8d99ae solid;
+    outline: none;
+    background: none;
+    height: 2.8em;
+    padding-left: 0.7em;
+    border-radius: 0.8em;
+    color: #6c757d;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+}
+#s-inp input::placeholder{
+    color: #6c757d;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+}
+#s-inp label{
+    margin-top: 1em;
+    color: #6c757d;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 650;
+}
+.s-head{
+    color: #6c757d;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 650;
+}
+#s-inp button{
+    margin-top: 2em;
+    border-radius: 0.8em;
+    color: #a5b0c5;
+    height: 3em;
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 550;
+    border: none;
+    background: #2b2d42;
+}
+#s-inp p{
+    color: #6c757d;
+    margin-top: 0.5em;
+    text-align: center;
+}
+#s-inp a{
+    color: #f94144;
+    text-decoration: none;
+}
+#s-inp a:hover{
+    color: #1c2055;
+}
+.logged{
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    color: #6c757d;
+    text-align: center;
+}
+.logged h3{
+    margin-top: 1em;
+}
+.logged p{
+    margin-top: 1em;
+    font-size: 12pt;
+    text-align: center;
+}
+.logged a{
+    text-decoration: none;
+}
+.offcanvas-body details[open] {
+    height: 9.5em;
+}
+.offcanvas-body details summary{
+    list-style: none;
+    text-transform: uppercase;
+    font-size: 14pt;
+    display: flex;
+    justify-content: space-between;
+}
+.offcanvas-body details summary p,svg{
+    height: 1.5em;
+    margin-top: -0.6em;
+}
+.offcanvas-body details a{
+    text-decoration: none;
+    color: #2b2d42;
+    margin: 0 0 1em 1.7em;
+    font-size: 13pt;
+}
+.offcanvas-body details a svg{
+    margin-top: 0em;
+}

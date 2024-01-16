@@ -13,7 +13,8 @@ def home(request):
         'cat':Categories.objects.all(),
         'prd':Products.objects.all()[:4],
         'recent':Products.objects.all().order_by('-total_sale')[:4],
-        'latest':latest_nike
+        'latest':latest_nike,
+        'all_prd':Products.objects.all()
     }
     return render(request,'homepage/home.html',dict_cate)
 def categorypage(request):

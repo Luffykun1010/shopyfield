@@ -15,15 +15,15 @@
     <div id="container1">
         <div class="row" style="width: 100%;">
             <div class="col-lg-1"></div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-8">
                 <div id="cart_prd">
                     {% for c in cart %}
                     <div class="row mt-2 mb-3">
-                        <div class="col-lg-2 mt-3">
+                        <div class="col-lg-2 col-3 mt-3">
                             <img src="{{c.product.prd_img.url}}" class="card-img-top" alt="..."
                                 style="height: 6.5em;width: 100%;border-radius: 10px;margin-left: 0.6em;">
                         </div>
-                        <div class="col-lg-5 col-7" style="margin-top: 10px;">
+                        <div class="col-lg-5 col-4 mb-2" style="margin-top: 10px;">
                             {% if cart_1.category_code == c.product.category_code %}
                             {% comment %} {% url 'pdtdtls' d.category_code c.product.product_code %} {% endcomment %}
                             <a href="" style="text-decoration: none;">
@@ -37,7 +37,7 @@
                             <a href="">Add more item</a>
                             {% endif %}
                         </div>
-                        <div class="col-lg-5 col-12" style="margin: 1em 0;">
+                        <div class="col-5" style="margin: 1em 0;">
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" id="prd_quantity" class="prd_quantity" name="prd_quantity"
@@ -114,10 +114,10 @@
                 </div>
             </div>
             <div class="col-1"></div>
-            <div class="col-lg-3 col-11" id="cart_tot">
+            <div class="col-3" id="cart_tot">
                 <div class="row" style="margin-top: 20px;color: white;">
-                    <div class="col-lg-1 col-1"></div>
-                    <div class="col-10">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10 col-12">
                         <h4>Details</h4>
                         <hr>
                         <p>Total quantity : <b>{{ totalquantity }}</b></p>
@@ -133,7 +133,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
         </div>
     </div>
     <div id="container">
